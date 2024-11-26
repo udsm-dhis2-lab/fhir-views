@@ -1,0 +1,27 @@
+{
+  "resourceType": "Observation",
+  "status": "registered",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "provider-speciality",
+          "display": "Provider speciality"
+        }
+      ]
+    }
+  ],
+  "effectiveDateTime": "2024-10-01T09:00:00Z",
+  "valueString": "Pediatrician",
+  "encounter": {
+    "reference": "Encounter/109601-5-400388",
+    "type": "Encounter"
+  },
+  "hasMember": [
+    {
+      "type": "Observation",
+      "reference": "Observation/5008"
+    }
+  ]
+}

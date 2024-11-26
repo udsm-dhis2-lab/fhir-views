@@ -1,0 +1,91 @@
+{
+  "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "text": "This is the SQL-on-FHIR-v2 version of Encounter_flat.sql",
+  "name": "encounter_flat",
+  "status": "draft",
+  "resource": "Encounter",
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "path": "class.code",
+          "name": "class_code",
+          "type": "string"
+        },
+        {
+          "path": "class.display",
+          "name": "class_display",
+          "type": "string"
+        },
+        {
+          "path": "type.0.text",
+          "name": "encounter_type",
+          "type": "string"
+        },
+        {
+          "path": "subject.getReferenceKey(Patient)",
+          "name": "patient_id",
+          "type": "string"
+        },
+        {
+          "path": "period.start",
+          "name": "period_start",
+          "type": "dateTime"
+        },
+        {
+          "path": "period.end",
+          "name": "period_end",
+          "type": "dateTime"
+        }
+      ]
+    },
+    {
+      "forEachOrNull": "category.coding",
+      "column": [
+        {
+          "path": "code",
+          "name": "category",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "path": "getReferenceKey(Practitioner)",
+          "name": "practitioner_id",
+          "type": "string"
+        }
+      ],
+      "forEachOrNull": "participant.individual"
+    },
+    {
+      "column": [
+        {
+          "path": "serviceProvider.getReferenceKey(Organization)",
+          "name": "service_provider_id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "column": [
+        {
+          "path": "diagnosis.0.condition.getReferenceKey(Condition)",
+          "name": "primary_diagnosis_id",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
