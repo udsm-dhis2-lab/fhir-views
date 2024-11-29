@@ -8,7 +8,7 @@
     {
       "column": [
         {
-          "path": "getResourceKey()",
+          "path": "id",
           "name": "id",
           "type": "string"
         },
@@ -73,7 +73,7 @@
       "column": [
         {
           "path": "serviceProvider.getReferenceKey(Organization)",
-          "name": "service_provider_id",
+          "name": "organization_id",
           "type": "string"
         }
       ]
