@@ -13,7 +13,7 @@
         {
           "path": "fhir_id",
           "name": "patient_id",
-          "sql": "SELECT fhir_id FROM hfj_resource WHERE resource_type = 'Patient' AND res_id = id"
+          "sql": "SELECT fhir_id FROM hfj_resource WHERE res_type = 'Patient' AND res_id = id"
         },
         {
           "path": "active",
