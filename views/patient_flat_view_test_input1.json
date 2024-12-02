@@ -1,0 +1,123 @@
+{
+  "resourceType": "Patient",
+  "id": "HCR-M-364805-25061998",
+  "identifier": [
+    {
+      "use": "official",
+      "type": {
+        "coding": [
+          {
+            "code": "MRN",
+            "display": "Medical Record Number"
+          }
+        ],
+        "text": "Medical Record Number"
+      },
+      "system": "https://fhir.dhis2.udsm.ac.tz",
+      "value": "109601-5-029022987/2023",
+      "assigner": {
+        "reference": "Organization/109601-5",
+        "type": "Organization"
+      }
+    },
+    {
+      "use": "official",
+      "type": {
+        "coding": [
+          {
+            "code": "HCRCODE",
+            "display": "HDU Identification"
+          }
+        ],
+        "text": "HDU Identification"
+      },
+      "system": "https://fhir.dhis2.udsm.ac.tz"
+    },
+    {
+      "use": "official",
+      "type": {
+        "coding": [
+          {
+            "code": "NIDA",
+            "display": "NIDA"
+          }
+        ],
+        "text": "NIDA"
+      },
+      "system": "https://fhir.dhis2.udsm.ac.tz",
+      "value": "19980215-03453-00004-21"
+    },
+    {
+      "use": "official",
+      "type": {
+        "coding": [
+          {
+            "code": "INS001",
+            "display": "National Health Insurance Fund"
+          }
+        ],
+        "text": "INS001"
+      },
+      "system": "https://fhir.dhis2.udsm.ac.tz",
+      "value": "7383738389393"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "Haule",
+      "given": ["Jumanne"]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "+255787656431",
+      "use": "home"
+    },
+    {
+      "system": "email",
+      "value": "test@moh.go.tz",
+      "use": "home"
+    }
+  ],
+  "gender": "male",
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "LA3-11",
+        "display": "Married"
+      }
+    ],
+    "text": "Married"
+  },
+  "birthDate": "1998-06-25T00:00:00.000Z",
+  "address": [
+    {
+      "text": "Kijinini - Katani",
+      "district": "Ubungo",
+      "city": "Dar es salaam",
+      "country": "Tanzania",
+      "use": "home"
+    }
+  ],
+  "contact": [
+    {
+      "name": {
+        "family": "Haule",
+        "given": ["Richard"]
+      },
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "+255767652234"
+        }
+      ]
+    }
+  ],
+  "managingOrganization": {
+    "reference": "Organization/109601-5",
+    "type": "Organization"
+  }
+}
