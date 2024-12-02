@@ -11,7 +11,7 @@
           "type": "string"
         },
         {
-          "path": "(SELECT fhir_id FROM hjf_resource WHERE resource_type = 'Patient' AND resource_id = id)",
+          "path": "(SELECT fhir_id FROM hfj_resource WHERE resource_type = 'Patient' AND res_id = id)",
           "name": "patient_id",
           "type": "string"
         },
