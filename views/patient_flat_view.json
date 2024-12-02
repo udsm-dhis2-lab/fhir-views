@@ -11,6 +11,11 @@
           "type": "string"
         },
         {
+          "path": "(SELECT fhir_id FROM hjf_resource WHERE resource_type = 'Patient' AND resource_id = id)",
+          "name": "patient_id",
+          "type": "string"
+        },
+        {
           "path": "active",
           "name": "active",
           "type": "boolean"
