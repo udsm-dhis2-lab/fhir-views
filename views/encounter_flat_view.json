@@ -13,6 +13,11 @@
           "type": "string"
         },
         {
+          "path": "getResourceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string"
+        },
+        {
           "path": "status",
           "name": "status",
           "type": "string"
