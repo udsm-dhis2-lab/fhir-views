@@ -13,6 +13,11 @@
           "type": "string"
         },
         {
+          "path": "fhir_id",
+          "name": "encounter_id",
+          "sql": "SELECT fhir_id FROM hfj_resource WHERE res_type = 'Encounter' AND res_id = id"
+        },
+        {
           "path": "status",
           "name": "status",
           "type": "string"
