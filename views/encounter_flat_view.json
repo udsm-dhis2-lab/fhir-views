@@ -55,6 +55,21 @@
       ]
     },
     {
+      "forEachOrNull": "identifier",
+      "column": [
+        {
+          "path": "type.coding[0].code",
+          "name": "identifier_type",
+          "type": "string"
+        },
+        {
+          "path": "value",
+          "name": "identifier_value",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "forEachOrNull": "category.coding",
       "column": [
         {

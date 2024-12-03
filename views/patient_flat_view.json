@@ -51,7 +51,7 @@
       "forEachOrNull": "identifier",
       "column": [
         {
-          "path": "type",
+          "path": "type.coding[0].code",
           "name": "identifier_type",
           "type": "string"
         },
