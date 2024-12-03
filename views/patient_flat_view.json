@@ -48,6 +48,21 @@
       ]
     },
     {
+      "forEachOrNull": "identifier",
+      "column": [
+        {
+          "path": "type",
+          "name": "identifier_type",
+          "type": "string"
+        },
+        {
+          "path": "value",
+          "name": "identifier_value",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "column": [
         {
           "path": "getReferenceKey(Practitioner)",
