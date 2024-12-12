@@ -67,27 +67,27 @@
         },
         {
           "path": "value.ofType(string)",
-          "name": "val_string",
+          "name": "value_string",
           "type": "string"
         },
         {
           "path": "value.ofType(boolean)",
-          "name": "val_boolean",
+          "name": "value_boolean",
           "type": "boolean"
         },
         {
           "path": "value.ofType(integer)",
-          "name": "val_integer",
+          "name": "value_integer",
           "type": "integer"
         },
         {
           "path": "value.ofType(dateTime)",
-          "name": "val_datetime",
+          "name": "value_datetime",
           "type": "dateTime"
         },
         {
           "path": "value.ofType(time)",
-          "name": "val_time",
+          "name": "value_time",
           "type": "time"
         }
       ]
@@ -102,7 +102,7 @@
         },
         {
           "path": "system",
-          "name": "code_sys",
+          "name": "code_system",
           "type": "string"
         },
         {
@@ -133,6 +133,61 @@
           "path": "hasMember.getReferenceKey(Observation)",
           "name": "group_obs_id",
           "type": "string"
+        }
+      ]
+    },
+    {
+      "forEachOrNull": "component",
+      "column": [
+        {
+          "path": "code.coding[0].code",
+          "name": "component_code",
+          "type": "string"
+        },
+        {
+          "path": "code.coding[0].display",
+          "name": "component_display",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(Quantity).value",
+          "name": "component_value_quantity",
+          "type": "decimal"
+        },
+        {
+          "path": "value.ofType(Quantity).unit",
+          "name": "component_value_unit",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(CodeableConcept).text",
+          "name": "component_value_text",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding[0].code",
+          "name": "component_value_code",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding[0].system",
+          "name": "component_value_system",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(string)",
+          "name": "component_value_string",
+          "type": "string"
+        },
+        {
+          "path": "value.ofType(boolean)",
+          "name": "component_value_boolean",
+          "type": "boolean"
+        },
+        {
+          "path": "value.ofType(dateTime)",
+          "name": "component_value_datetime",
+          "type": "dateTime"
         }
       ]
     }
