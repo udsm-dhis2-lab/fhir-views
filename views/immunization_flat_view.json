@@ -9,6 +9,11 @@
           "path": "getResourceKey()",
           "name": "id",
           "type": "string"
+        },
+        {
+          "path": "encounter.getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string"
         }
       ]
     }

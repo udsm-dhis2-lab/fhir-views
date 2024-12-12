@@ -9,6 +9,41 @@
           "path": "getResourceKey()",
           "name": "id",
           "type": "string"
+        },
+        {
+          "path": "encounter.getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "forEachOrNull": "category.coding",
+      "column": [
+        {
+          "path": "code",
+          "name": "category",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "forEachOrNull": "code.coding",
+      "column": [
+        {
+          "path": "code",
+          "name": "code",
+          "type": "string"
+        },
+        {
+          "path": "system",
+          "name": "code_system",
+          "type": "string"
+        },
+        {
+          "path": "display",
+          "name": "code_display",
+          "type": "string"
         }
       ]
     }
