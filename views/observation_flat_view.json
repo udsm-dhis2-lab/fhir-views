@@ -26,6 +26,16 @@
           "type": "string"
         },
         {
+          "forEachOrNull": "category.coding",
+          "column": [
+            {
+              "path": "code",
+              "name": "category",
+              "type": "string"
+            }
+          ]
+        },
+        {
           "path": "effective.ofType(dateTime)",
           "name": "obs_date",
           "type": "dateTime"
