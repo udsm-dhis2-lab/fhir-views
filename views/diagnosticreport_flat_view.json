@@ -51,6 +51,42 @@
           "type": "string"
         }
       ]
+    },
+    {
+      "forEachOrNull": "result",
+      "join": "Observation",
+      "column": [
+        {
+          "path": "getReferenceKey()",
+          "name": "observation_id",
+          "type": "string"
+        },
+        {
+          "path": "valueQuantity.value",
+          "name": "observation_value",
+          "type": "decimal"
+        },
+        {
+          "path": "valueQuantity.unit",
+          "name": "observation_unit",
+          "type": "string"
+        },
+        {
+          "path": "code.coding[0].code",
+          "name": "observation_code",
+          "type": "string"
+        },
+        {
+          "path": "code.coding[0].system",
+          "name": "observation_code_system",
+          "type": "string"
+        },
+        {
+          "path": "code.coding[0].display",
+          "name": "observation_display",
+          "type": "string"
+        }
+      ]
     }
   ],
   "name": "diagnosticreport_flat",
