@@ -156,7 +156,11 @@ async function processMappings(datastoreKeyData) {
       }
 
       query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
-      query += `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
+
+      query +=
+        loincOrderCodes.length > 0
+          ? `AND drep.effective_datetime >='${startDate}' AND drep.effective_datetime <='${endDate}' \n`
+          : `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
 
       query += ` GROUP BY `;
       query += icdCodes && icdCodes.length > 0 ? `cond.code,` : "";
