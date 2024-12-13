@@ -122,18 +122,39 @@ async function processMappings(datastoreKeyData) {
         } \n`;
       });
       let icdCodes = [];
+      let loincOrderCodes = [];
+      let loincObsCodes = [];
+
       if (mapping.icdMappings && mapping.icdMappings.length > 0) {
         icdCodes = mapping.icdMappings.map((icdMapping, index) => {
           return icdMapping.code;
         });
       }
 
+      if (mapping.loincMappings && mapping.loincMappings.length > 0) {
+        loincOrderCodes = mapping.loincMappings.map((mappingItem, index) => {
+          return mappingItem.code;
+        });
+      }
+
+      if (mapping.loincObsMappings && mapping.loincObsMappings.length > 0) {
+        loincObsCodes = mapping.loincObsMappings.map((mappingItem, index) => {
+          return mappingItem.code;
+        });
+      }
+
       query += ` FROM encounter_flat en \n`;
 
+      // Be careful when choosing right vs left join
       if (icdCodes && icdCodes.length > 0) {
         query += `RIGHT JOIN condition_flat cond ON en.id = cond.encounter_id \n`;
         query += `AND cond.code IN ('${icdCodes.join("','")}') \n`;
       }
+      if (loincOrderCodes.length > 0) {
+        query += `RIGHT JOIN diagnosticreport_flat drep ON en.id = drep.encounter_id \n`;
+        query += `AND drep.code IN ('${loincOrderCodes.join("','")}') \n`;
+      }
+
       query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
       query += `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
 
