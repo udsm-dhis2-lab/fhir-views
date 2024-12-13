@@ -29,12 +29,13 @@ const env = loadEnv(".env");
 const username = env.USERNAME;
 const password = env.PASSWORD;
 const baseUrl = env.BASE_URL;
+const dataSetsReferences = env.DATASETS;
 
 console.log(username, password, baseUrl);
-async function fetchMappings() {
+async function fetchMappings(dataSetId) {
   try {
     const response = await fetch(
-      baseUrl + "/api/v1/datastore/MAPPINGS-V8bbSX0sFf2?pageSize=100",
+      baseUrl + `/api/v1/datastore/MAPPINGS-${dataSetId}?pageSize=100`,
       {
         method: "GET",
         headers: {
@@ -58,7 +59,11 @@ async function fetchMappings() {
   }
 }
 
-fetchMappings();
+const dataSets = dataSetsReferences.split(","); // Set on respective env variable with format V8bbSX0sFf2,Pw3c2BcqbQ5 i.e each dataset id seperated by comma
+
+for (const dataSet of dataSets) {
+  fetchMappings(dataSet);
+}
 
 const startDate = "2024-11-01";
 const endDate = "2024-11-30:23:59:59";
