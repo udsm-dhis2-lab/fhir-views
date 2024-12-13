@@ -14,6 +14,11 @@
           "path": "encounter.getReferenceKey(Encounter)",
           "name": "encounter_id",
           "type": "string"
+        },
+        {
+          "path": "effective.ofType(dateTime)",
+          "name": "effective_datetime",
+          "type": "dateTime"
         }
       ]
     },
