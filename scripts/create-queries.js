@@ -34,7 +34,7 @@ console.log(username, password, baseUrl);
 async function fetchMappings() {
   try {
     const response = await fetch(
-      baseUrl + "/api/v1/datastore/MAPPINGS-Pw3c2BcqbQ5?pageSize=100",
+      baseUrl + "/api/v1/datastore/MAPPINGS-V8bbSX0sFf2?pageSize=100",
       {
         method: "GET",
         headers: {
@@ -87,24 +87,30 @@ async function processMappings(datastoreKeyData) {
           (hasGender || hasAgeGroup
             ? ` FILTER ( WHERE ${
                 hasGender
-                  ? "pt.gender='" + (gender === "M" ? "male" : "female") + "'"
+                  ? "pt.gender='" +
+                    (gender === "M" ||
+                    gender === "ME" ||
+                    gender.toLowerCase() === "male"
+                      ? "male"
+                      : "female") +
+                    "'"
                   : ""
               } ${hasGender && hasAgeGroup ? "AND" : ""} ${
                 hasAgeGroup
                   ? "pt.birth_date >= (CURRENT_DATE - INTERVAL '" +
                     startAge +
-                    (ageType === "years"
+                    (ageType.toLowerCase() === "years"
                       ? " YEAR "
-                      : ageType === "months"
+                      : ageType.toLowerCase() === "months"
                       ? " MONTH "
                       : " DAY ") +
                     "')" +
                     " AND " +
                     "pt.birth_date <= (CURRENT_DATE - INTERVAL '" +
                     endAge +
-                    (ageType === "years"
+                    (ageType.toLowerCase() === "years"
                       ? " YEAR "
-                      : ageType === "months"
+                      : ageType.toLowerCase() === "months"
                       ? " MONTH "
                       : " DAY ") +
                     "')"
