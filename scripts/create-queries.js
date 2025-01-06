@@ -160,6 +160,41 @@ async function processMappings(datastoreKeyData) {
         query += `AND drep.code IN ('${loincOrderCodes.join("','")}') \n`;
       }
 
+      if (mapping.queries && mapping.queries.length > 0) {
+        mapping.queries.forEach((queryItem, index) => {
+          const leftSide = queryItem.leftSideQuery?.value;
+          const operator = queryItem.operator;
+          const rightSide = queryItem.rightSideQuery?.value;
+
+          if (leftSide && operator && rightSide !== undefined) {
+            const leftField =
+              leftSide.table && leftSide.code
+                ? `${leftSide.table}.${leftSide.code}`
+                : leftSide.code;
+
+            let rightValue;
+            if (queryItem.rightSideQuery.type === "tableField") {
+              rightValue =
+                rightSide.table && rightSide.code
+                  ? `${rightSide.table}.${rightSide.code}`
+                  : rightSide.code;
+            } else if (queryItem.rightSideQuery.type === "primitiveValue") {
+              if (typeof rightSide === "string") {
+                rightValue = `'${rightSide}'`;
+              } else if (typeof rightSide === "number") {
+                rightValue = rightSide;
+              } else if (typeof rightSide === "boolean") {
+                rightValue = rightSide ? "TRUE" : "FALSE";
+              }
+            }
+
+            if (leftField && operator && rightValue !== undefined) {
+              query += `AND ${leftField} ${operator} ${rightValue} \n`;
+            }
+          }
+        });
+      }
+
       query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
 
       query +=
