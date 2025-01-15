@@ -147,7 +147,6 @@ async function processMappings(datastoreKeyData) {
           return mappingItem.code;
         });
       }
-
       query += ` FROM encounter_flat en \n`;
 
       // Be careful when choosing right vs left join
@@ -193,20 +192,26 @@ async function processMappings(datastoreKeyData) {
             }
           }
         });
+        if (loincObsCodes.length > 0) {
+          query += ` RIGHT JOIN observation_flat obs ON obs.encounter_id = en.encounter_id \n`;
+          query += `AND obs.val_concept_code IN ('${loincObsCodes.join(
+            "','"
+          )}') \n`;
+        }
+
+        query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
+
+        query +=
+          loincOrderCodes.length > 0
+            ? `AND drep.effective_datetime >='${startDate}' AND drep.effective_datetime <='${endDate}' \n`
+            : `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
+
+        query += ` GROUP BY `;
+        query += icdCodes && icdCodes.length > 0 ? `cond.code,` : "";
+        query += hasGender ? `pt.gender,` : "";
+        query += ` en.organization_id;`;
+        console.log(query);
       }
-
-      query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
-
-      query +=
-        loincOrderCodes.length > 0
-          ? `AND drep.effective_datetime >='${startDate}' AND drep.effective_datetime <='${endDate}' \n`
-          : `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
-
-      query += ` GROUP BY `;
-      query += icdCodes && icdCodes.length > 0 ? `cond.code,` : "";
-      query += hasGender ? `pt.gender,` : "";
-      query += ` en.organization_id;`;
-      console.log(query);
     }
   });
 }
