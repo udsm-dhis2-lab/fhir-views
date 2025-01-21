@@ -69,6 +69,7 @@ const startDate = "2024-11-01";
 const endDate = "2024-11-30:23:59:59";
 
 async function processMappings(datastoreKeyData) {
+  const queries = [];
   datastoreKeyData.forEach((datastoreKey) => {
     const mapping = datastoreKey?.value;
     if (mapping && mapping?.params) {
@@ -102,22 +103,22 @@ async function processMappings(datastoreKeyData) {
                   : ""
               } ${hasGender && hasAgeGroup ? "AND" : ""} ${
                 hasAgeGroup
-                  ? "pt.birth_date >= (CURRENT_DATE - INTERVAL '" +
-                    startAge +
-                    (ageType.toLowerCase() === "years"
-                      ? " YEAR "
-                      : ageType.toLowerCase() === "months"
-                      ? " MONTH "
-                      : " DAY ") +
-                    "')" +
-                    " AND " +
-                    "pt.birth_date <= (CURRENT_DATE - INTERVAL '" +
+                  ? "pt.birth_date BETWEEN (CURRENT_DATE - INTERVAL '" +
                     endAge +
                     (ageType.toLowerCase() === "years"
-                      ? " YEAR "
+                      ? " YEAR"
                       : ageType.toLowerCase() === "months"
-                      ? " MONTH "
-                      : " DAY ") +
+                      ? " MONTH"
+                      : " DAY") +
+                    "')" +
+                    " AND " +
+                    "(CURRENT_DATE - INTERVAL '" +
+                    startAge +
+                    (ageType.toLowerCase() === "years"
+                      ? " YEAR"
+                      : ageType.toLowerCase() === "months"
+                      ? " MONTH"
+                      : " DAY") +
                     "')"
                   : ""
               })`
@@ -147,6 +148,7 @@ async function processMappings(datastoreKeyData) {
           return mappingItem.code;
         });
       }
+
       query += ` FROM encounter_flat en \n`;
 
       // Be careful when choosing right vs left join
@@ -158,6 +160,9 @@ async function processMappings(datastoreKeyData) {
         query += `RIGHT JOIN diagnosticreport_flat drep ON en.id = drep.encounter_id \n`;
         query += `AND drep.code IN ('${loincOrderCodes.join("','")}') \n`;
       }
+
+      let joins = new Set();
+      let conditions = [];
 
       if (mapping.queries && mapping.queries.length > 0) {
         mapping.queries.forEach((queryItem, index) => {
@@ -171,12 +176,25 @@ async function processMappings(datastoreKeyData) {
                 ? `${leftSide.table}.${leftSide.code}`
                 : leftSide.code;
 
+            joins.add(
+              `LEFT JOIN ${leftSide.table} ON ${leftSide.table}.encounter_id = en.identifier_value`
+            );
+
             let rightValue;
             if (queryItem.rightSideQuery.type === "tableField") {
               rightValue =
                 rightSide.table && rightSide.code
                   ? `${rightSide.table}.${rightSide.code}`
                   : rightSide.code;
+              if (
+                !joins.has(
+                  `LEFT JOIN ${rightSide.table} ON ${rightSide.table}.encounter_id = en.identifier_value`
+                )
+              ) {
+                joins.add(
+                  `LEFT JOIN ${rightSide.table} ON ${rightSide.table}.encounter_id = en.identifier_value`
+                );
+              }
             } else if (queryItem.rightSideQuery.type === "primitiveValue") {
               if (typeof rightSide === "string") {
                 rightValue = `'${rightSide}'`;
@@ -188,30 +206,38 @@ async function processMappings(datastoreKeyData) {
             }
 
             if (leftField && operator && rightValue !== undefined) {
-              query += `AND ${leftField} ${operator} ${rightValue} \n`;
+              conditions.push(`${leftField} ${operator} ${rightValue}`);
             }
           }
         });
-        if (loincObsCodes.length > 0) {
-          query += ` RIGHT JOIN observation_flat obs ON obs.encounter_id = en.encounter_id \n`;
-          query += `AND obs.val_concept_code IN ('${loincObsCodes.join(
-            "','"
-          )}') \n`;
-        }
-
-        query += `LEFT JOIN patient_flat pt ON pt.id = en.patient_id \n `;
-
-        query +=
-          loincOrderCodes.length > 0
-            ? `AND drep.effective_datetime >='${startDate}' AND drep.effective_datetime <='${endDate}' \n`
-            : `AND en.period_start >= '${startDate}' AND en.period_start <= '${endDate}' \n`;
-
-        query += ` GROUP BY `;
-        query += icdCodes && icdCodes.length > 0 ? `cond.code,` : "";
-        query += hasGender ? `pt.gender,` : "";
-        query += ` en.organization_id;`;
-        console.log(query);
       }
+
+      if (mapping.newVisit) {
+        conditions.push(`en.new_visit = TRUE`);
+      }
+
+      if (mapping.newThisYear) {
+        conditions.push(`en.new_this_year = TRUE`);
+      }
+
+      query += `LEFT JOIN patient_flat pt ON pt.identifier_value = en.patient_id \n `;
+      query += `${Array.from(joins).join("\n")}\n`;
+
+      conditions.push(
+        loincOrderCodes.length > 0
+          ? `drep.effective_datetime BETWEEN '${startDate}' AND '${endDate}'`
+          : `en.period_start BETWEEN '${startDate}' AND '${endDate}'`
+      );
+
+      if (conditions.length > 0) {
+        query += `WHERE ${conditions.join(" AND ")}\n`;
+      }
+      query += ` GROUP BY `;
+      query += icdCodes && icdCodes.length > 0 ? `cond.code,` : "";
+      query += hasGender ? `pt.gender,` : "";
+      query += ` en.organization_id;`;
+      console.log(query);
+      // queries.push(query)
     }
   });
 }
