@@ -51,6 +51,16 @@
           "path": "period.end",
           "name": "period_end",
           "type": "dateTime"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newThisYear').value.ofType(boolean)",
+          "name": "new_this_year",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newVisit').value.ofType(boolean)",
+          "name": "new_visit",
+          "type": "boolean"
         }
       ]
     },
