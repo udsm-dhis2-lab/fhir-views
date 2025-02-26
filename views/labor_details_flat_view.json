@@ -1,0 +1,76 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "text": "Flat view definition for Procedure resource.",
+    "fhirVersion": [
+        "4.0"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "id",
+                    "name": "procedure_id",
+                    "type": "string"
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string"
+                },
+                {
+                    "path": "category.coding[0].code",
+                    "name": "procedure_category_code",
+                    "type": "string"
+                },
+                {
+                    "path": "category.coding[0].display",
+                    "name": "procedure_category_display",
+                    "type": "string"
+                },
+                {
+                    "path": "code.coding[0].code",
+                    "name": "procedure_code",
+                    "type": "string"
+                },
+                {
+                    "path": "code.coding[0].display",
+                    "name": "procedure_display",
+                    "type": "string"
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string"
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
+                    "path": "performed.ofType(dateTime)",
+                    "name": "procedure_date",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/placeOfBirth').value.ofType(string)",
+                    "name": "place_of_birth",
+                    "type": "string"
+                },
+                {
+                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/timeBetweenLaborPainAndDeliveryInHrs').value.ofType(decimal)",
+                    "name": "time_between_labor_pain_and_delivery_in_hrs",
+                    "type": "decimal"
+                },
+                {
+                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/isAttendantSkilled').value.ofType(boolean)",
+                    "name": "is_attendant_skilled",
+                    "type": "boolean"
+                }
+            ]
+        }
+    ],
+    "name": "procedure_flat_view",
+    "status": "active",
+    "resource": "Procedure"
+}
