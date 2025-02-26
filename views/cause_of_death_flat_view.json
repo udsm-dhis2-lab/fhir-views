@@ -1,0 +1,91 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "text": "Flat view definition for Cause of Death Observation resource.",
+    "fhirVersion": [
+        "4.0"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string"
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string"
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "date_of_death",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'lineA').value.ofType(string)",
+                    "name": "cause_of_death_line_a",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'lineB').value.ofType(string)",
+                    "name": "cause_of_death_line_b",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'lineC').value.ofType(string)",
+                    "name": "cause_of_death_line_c",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'lineD').value.ofType(string)",
+                    "name": "cause_of_death_line_d",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.text = 'Other cause of death').value.ofType(string)",
+                    "name": "other_cause_of_death",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = '80931-1').value.ofType(string)",
+                    "name": "place_of_death",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.text = 'Manner of death').value.ofType(string)",
+                    "name": "manner_of_death",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = '74211-9').value.ofType(string)",
+                    "name": "postmortem_examination",
+                    "type": "string"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'LA15610-7').value.ofType(boolean)",
+                    "name": "marcerated",
+                    "type": "boolean"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'LA15609-9').value.ofType(boolean)",
+                    "name": "fresh",
+                    "type": "boolean"
+                },
+                {
+                    "path": "component.where(code.coding[0].code = 'LA20129-8').value.ofType(string)",
+                    "name": "mother_condition",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "name": "cause_of_death_flat",
+    "status": "active",
+    "resource": "Observation"
+}
