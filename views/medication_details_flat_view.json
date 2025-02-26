@@ -1,0 +1,121 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "text": "Flat view definition for Medication Dispense resource.",
+    "fhirVersion": [
+        "4.0"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "id",
+                    "name": "medication_dispense_id",
+                    "type": "string"
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string"
+                },
+                {
+                    "path": "medicationCodeableConcept.coding[0].code",
+                    "name": "medication_code",
+                    "type": "string"
+                },
+                {
+                    "path": "medicationCodeableConcept.coding[0].display",
+                    "name": "medication_display",
+                    "type": "string"
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string"
+                },
+                {
+                    "path": "context.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
+                    "path": "quantity.value",
+                    "name": "quantity_value",
+                    "type": "decimal"
+                },
+                {
+                    "path": "quantity.unit",
+                    "name": "quantity_unit",
+                    "type": "string"
+                },
+                {
+                    "path": "daysSupply.value",
+                    "name": "days_supply_value",
+                    "type": "decimal"
+                },
+                {
+                    "path": "daysSupply.unit",
+                    "name": "days_supply_unit",
+                    "type": "string"
+                },
+                {
+                    "path": "whenPrepared",
+                    "name": "when_prepared",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "whenHandedOver",
+                    "name": "when_handed_over",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "dosageInstruction[0].sequence",
+                    "name": "dosage_sequence",
+                    "type": "integer"
+                },
+                {
+                    "path": "dosageInstruction[0].timing.repeat.frequency",
+                    "name": "dosage_frequency",
+                    "type": "integer"
+                },
+                {
+                    "path": "dosageInstruction[0].timing.repeat.period",
+                    "name": "dosage_period",
+                    "type": "decimal"
+                },
+                {
+                    "path": "dosageInstruction[0].timing.repeat.periodUnit",
+                    "name": "dosage_period_unit",
+                    "type": "string"
+                },
+                {
+                    "path": "dosageInstruction[0].asNeededBoolean",
+                    "name": "dosage_as_needed",
+                    "type": "boolean"
+                },
+                {
+                    "path": "dosageInstruction[0].route.coding[0].code",
+                    "name": "dosage_route_code",
+                    "type": "string"
+                },
+                {
+                    "path": "dosageInstruction[0].route.coding[0].display",
+                    "name": "dosage_route_display",
+                    "type": "string"
+                },
+                {
+                    "path": "dosageInstruction[0].doseAndRate[0].doseQuantity.value",
+                    "name": "dosage_dose_value",
+                    "type": "decimal"
+                },
+                {
+                    "path": "dosageInstruction[0].doseAndRate[0].doseQuantity.unit",
+                    "name": "dosage_dose_unit",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "name": "medication_dispense_flat_view",
+    "status": "active",
+    "resource": "MedicationDispense"
+}
