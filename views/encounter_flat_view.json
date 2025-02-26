@@ -33,7 +33,7 @@
           "type": "string"
         },
         {
-          "path": "type.0.text",
+          "path": "type[0].text",
           "name": "encounter_type",
           "type": "string"
         },
@@ -61,6 +61,11 @@
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newVisit').value.ofType(boolean)",
           "name": "new_visit",
           "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/reportingDate').value.ofType(string)",
+          "name": "reportingDate",
+          "type": "string"
         }
       ]
     },
