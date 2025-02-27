@@ -23,6 +23,11 @@
                     "type": "string"
                 },
                 {
+                    "path": "category[0].coding.code",
+                    "name": "category",
+                    "type": "string"
+                },
+                {
                     "path": "effective.ofType(dateTime)",
                     "name": "date_of_death",
                     "type": "dateTime"
