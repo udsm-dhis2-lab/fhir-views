@@ -8,7 +8,7 @@
         {
             "column": [
                 {
-                    "path": "id",
+                    "path": "getResourceKey()",
                     "name": "medication_dispense_id",
                     "type": "string"
                 },

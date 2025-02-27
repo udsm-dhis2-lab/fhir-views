@@ -8,7 +8,7 @@
         {
             "column": [
                 {
-                    "path": "id",
+                    "path": "getResourceKey()",
                     "name": "diagnostic_report_id",
                     "type": "string"
                 },

@@ -8,7 +8,7 @@
         {
             "column": [
                 {
-                    "path": "id",
+                    "path": "getResourceKey()",
                     "name": "charge_item_id",
                     "type": "string"
                 },
