@@ -1,0 +1,76 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "text": "Flat view definition for DiagnosticReport resource.",
+    "fhirVersion": [
+        "4.0"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "id",
+                    "name": "diagnostic_report_id",
+                    "type": "string"
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string"
+                },
+                {
+                    "path": "category.coding[0].code",
+                    "name": "category_code",
+                    "type": "string"
+                },
+                {
+                    "path": "category.coding[0].display",
+                    "name": "category_display",
+                    "type": "string"
+                },
+                {
+                    "path": "code.coding[0].code",
+                    "name": "test_type_code",
+                    "type": "string"
+                },
+                {
+                    "path": "code.coding[0].display",
+                    "name": "test_type_name",
+                    "type": "string"
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string"
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "test_date",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "issued",
+                    "name": "issued_date",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "media[0].link.getReferenceKey(Media)",
+                    "name": "document_id",
+                    "type": "string"
+                },
+                {
+                    "path": "media[0].comment",
+                    "name": "document_comment",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "name": "diagnosticreport_flat_view",
+    "status": "active",
+    "resource": "DiagnosticReport"
+}
