@@ -9,7 +9,7 @@
             "column": [
                 {
                     "path": "getResourceKey()",
-                    "name": "procedure_id",
+                    "name": "id",
                     "type": "string"
                 },
                 {

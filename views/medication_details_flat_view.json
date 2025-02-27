@@ -9,7 +9,7 @@
             "column": [
                 {
                     "path": "getResourceKey()",
-                    "name": "medication_dispense_id",
+                    "name": "id",
                     "type": "string"
                 },
                 {
