@@ -18,6 +18,11 @@
                     "type": "string"
                 },
                 {
+                    "path": "category[0].coding[0].code",
+                    "name": "category",
+                    "type": "string"
+                },
+                {
                     "path": "encounter.getReferenceKey(Encounter)",
                     "name": "encounter_id",
                     "type": "string"
