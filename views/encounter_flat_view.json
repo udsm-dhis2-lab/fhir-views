@@ -84,7 +84,7 @@
         },
         {
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/complaints').value.ofType(string)",
-          "name": "provided_complaints",
+          "name": "complaints",
           "type": "string"
         }
       ]
