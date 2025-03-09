@@ -68,14 +68,24 @@
           "type": "string"
         },
         {
-          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/extension-attended-specialist').value.ofType(boolean)",
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/specialist').value.ofType(boolean)",
           "name": "specialist",
           "type": "boolean"
         },
         {
-          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/extension-attended-specialist').value.ofType(boolean)",
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/superSpecialist').value.ofType(boolean)",
           "name": "superSpecialist",
           "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/providedComplaints').value.ofType(boolean)",
+          "name": "provided_complaints",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/complaints').value.ofType(string)",
+          "name": "provided_complaints",
+          "type": "string"
         }
       ]
     },
