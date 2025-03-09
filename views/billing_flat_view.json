@@ -58,18 +58,8 @@
                     "type": "decimal"
                 },
                 {
-                    "path": "totalPriceComponent.where(type = 'exemption').amount.value.ofType(decimal)",
-                    "name": "exemption_amount",
-                    "type": "decimal"
-                },
-                {
                     "path": "reason[0].text",
                     "name": "bill_type",
-                    "type": "string"
-                },
-                {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'exemptionType').value.ofType(string)",
-                    "name": "exemption_type",
                     "type": "string"
                 },
                 {
