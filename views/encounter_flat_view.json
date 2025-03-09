@@ -66,6 +66,16 @@
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/reportingDate').value.ofType(string)",
           "name": "reportingDate",
           "type": "string"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/extension-attended-specialist').value.ofType(boolean)",
+          "name": "specialist",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/extension-attended-specialist').value.ofType(boolean)",
+          "name": "superSpecialist",
+          "type": "boolean"
         }
       ]
     },

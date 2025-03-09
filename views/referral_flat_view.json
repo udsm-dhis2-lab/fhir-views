@@ -51,26 +51,6 @@
                     "path": "authoredOn",
                     "name": "authored_on",
                     "type": "date"
-                },
-                {
-                    "path": "requester.getReferenceKey(Practitioner)",
-                    "name": "requester_id",
-                    "type": "string"
-                },
-                {
-                    "path": "performer[0].getReferenceKey(Organization)",
-                    "name": "performer_organization_id",
-                    "type": "string"
-                },
-                {
-                    "path": "locationReference[0].getReferenceKey(Location)",
-                    "name": "location_id",
-                    "type": "string"
-                },
-                {
-                    "path": "reasonReference[0].getReferenceKey(Observation)",
-                    "name": "reason_observation_id",
-                    "type": "string"
                 }
             ]
         }
