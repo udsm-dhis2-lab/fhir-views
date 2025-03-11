@@ -49,6 +49,11 @@
           "path": "authoredOn",
           "name": "authored_on",
           "type": "date"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/extension-referred-to-other-country').value.ofType(boolean)",
+          "name": "referred_to_other_country",
+          "type": "boolean"
         }
       ]
     }
