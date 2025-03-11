@@ -1,61 +1,59 @@
 {
-    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
-    "text": "Flat view definition for ServiceRequest resource.",
-    "fhirVersion": [
-        "4.0"
-    ],
-    "select": [
+  "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "text": "Flat view definition for ServiceRequest resource.",
+  "fhirVersion": ["4.0"],
+  "select": [
+    {
+      "column": [
         {
-            "column": [
-                {
-                    "path": "getResourceKey()",
-                    "name": "id",
-                    "type": "string"
-                },
-                {
-                    "path": "identifier[0].value",
-                    "name": "referral_number",
-                    "type": "string"
-                },
-                {
-                    "path": "status",
-                    "name": "status",
-                    "type": "string"
-                },
-                {
-                    "path": "intent",
-                    "name": "intent",
-                    "type": "string"
-                },
-                {
-                    "path": "category[0].coding[0].code",
-                    "name": "category_code",
-                    "type": "string"
-                },
-                {
-                    "path": "category[0].coding[0].display",
-                    "name": "category_display",
-                    "type": "string"
-                },
-                {
-                    "path": "priority",
-                    "name": "priority",
-                    "type": "string"
-                },
-                {
-                    "path": "encounter.getReferenceKey(Encounter)",
-                    "name": "encounter_id",
-                    "type": "string"
-                },
-                {
-                    "path": "authoredOn",
-                    "name": "authored_on",
-                    "type": "date"
-                }
-            ]
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "path": "identifier[0].value",
+          "name": "referral_number",
+          "type": "string"
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "path": "intent",
+          "name": "intent",
+          "type": "string"
+        },
+        {
+          "path": "category[0].coding[0].code",
+          "name": "category_code",
+          "type": "string"
+        },
+        {
+          "path": "category[0].coding[0].display",
+          "name": "category_display",
+          "type": "string"
+        },
+        {
+          "path": "priority",
+          "name": "priority",
+          "type": "string"
+        },
+        {
+          "path": "encounter.getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string"
+        },
+        {
+          "path": "authoredOn",
+          "name": "authored_on",
+          "type": "date"
         }
-    ],
-    "name": "service_request_flat_view",
-    "status": "active",
-    "resource": "ServiceRequest"
+      ]
+    }
+  ],
+  "name": "service_request_flat_view",
+  "status": "active",
+  "resource": "ServiceRequest"
 }
