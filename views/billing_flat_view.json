@@ -61,9 +61,9 @@
           "type": "string"
         },
         {
-          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'wavedAmount').value.ofType(string)",
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'wavedAmount').value.ofType(decimal)",
           "name": "waved_amount",
-          "type": "string"
+          "type": "decimal"
         },
         {
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'standardCode').value.ofType(string)",

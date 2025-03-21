@@ -1,0 +1,54 @@
+{
+  "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "text": "Flat view definition for ServiceRequest resource.",
+  "fhirVersion": ["4.0"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "path": "fhir_id",
+          "name": "patient_id",
+          "sql": "SELECT fhir_id FROM hfj_resource WHERE res_type = 'Appointment' AND res_id = id"
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "path": "supportingInformation.where(reference.startsWith('Patient')).first().getReferenceKey(Patient)",
+          "name": "supporting_patient_id",
+          "type": "string"
+        },
+        {
+          "path": "supportingInformation.where(reference.startsWith('Encounter')).first().getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string"
+        },
+        {
+          "path": "supportingInformation.where(reference.startsWith('PaymentNotice')).first().getReferenceKey(PaymentNotice)",
+          "name": "payment_notice_id",
+          "type": "string"
+        },
+        {
+          "path": "serviceType[0].coding[0].code",
+          "name": "service_type_code",
+          "type": "string"
+        },
+        {
+          "path": "serviceType[0].coding[0].display",
+          "name": "service_type_name",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "name": "appointment_flat_view",
+  "status": "active",
+  "resource": "Appointment"
+}
