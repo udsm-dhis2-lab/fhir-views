@@ -11,6 +11,11 @@
           "type": "string"
         },
         {
+          "path": "fhir_id",
+          "name": "patient_id",
+          "sql": "SELECT fhir_id FROM hfj_resource WHERE res_type = 'Appointment' AND res_id = id"
+        },
+        {
           "path": "status",
           "name": "status",
           "type": "string"
