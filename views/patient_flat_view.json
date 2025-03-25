@@ -44,6 +44,11 @@
           "path": "managingOrganization.getReferenceKey(Organization)",
           "name": "organization_id",
           "type": "string"
+        },
+        {
+          "path": "identifier.where(type.coding.code = 'NIDA').value",
+          "name": "nida_identifier",
+          "type": "string"
         }
       ]
     },
