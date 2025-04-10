@@ -46,7 +46,7 @@
           "type": "string"
         },
         {
-          "path": "identifier.where(type.coding.code = 'NIDA').value",
+          "path": "iif(identifier.where(type.coding.code = 'NIDA').exists(), identifier.where(type.coding.code = 'NIDA').value.first(), null)",
           "name": "nida_identifier",
           "type": "string"
         }
