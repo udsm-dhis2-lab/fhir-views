@@ -1,0 +1,71 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "text": "Flat view definition for Vital Signs Observations (Blood Pressure, Weight, Height, Temperature, Respiratory rate, Heart rate).",
+    "fhirVersion": [
+        "4.0"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string"
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string"
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
+                    "path": "category[0].coding[0].code",
+                    "name": "category_code",
+                    "type": "string"
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "obs_date",
+                    "type": "dateTime"
+                },
+                {
+                    "path": "value.ofType(string)",
+                    "name": "blood_pressure_panel",
+                    "type": "string"
+                },
+                {
+                    "path": "value.ofType(Quantity).where(code = '29463-7').value",
+                    "name": "weight_kg",
+                    "type": "decimal"
+                },
+                {
+                    "path": "value.ofType(Quantity).where(code = '8302-2').value",
+                    "name": "height_cm",
+                    "type": "decimal"
+                },
+                {
+                    "path": "value.ofType(Quantity).where(code = '8310-5').value",
+                    "name": "temperature_celsius",
+                    "type": "decimal"
+                },
+                {
+                    "path": "value.ofType(Quantity).where(code = '9279-1').value",
+                    "name": "respiratory_rate_per_min",
+                    "type": "decimal"
+                },
+                {
+                    "path": "value.ofType(Quantity).where(code = '8867-4').value",
+                    "name": "heart_rate_per_min",
+                    "type": "decimal"
+                }
+            ]
+        }
+    ],
+    "name": "vital_observation_flat",
+    "status": "active",
+    "resource": "Observation"
+}

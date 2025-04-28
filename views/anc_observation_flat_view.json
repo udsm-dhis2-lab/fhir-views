@@ -35,6 +35,7 @@
           "name": "positive_hiv_status_before_service",
           "type": "boolean"
         },
+        
         {
           "path": "component.where(code.coding[0].code = '409073007').value.ofType(boolean)",
           "name": "provided_family_planning_counseling",

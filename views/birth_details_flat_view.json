@@ -18,6 +18,16 @@
                     "type": "string"
                 },
                 {
+                    "path": "category[0].coding[0].code",
+                    "name": "category_code",
+                    "type": "string"
+                },
+                {
+                    "path": "category[0].coding[0].display",
+                    "name": "category_display",
+                    "type": "string"
+                },
+                {
                     "path": "code.coding[0].code",
                     "name": "observation_code",
                     "type": "string"
