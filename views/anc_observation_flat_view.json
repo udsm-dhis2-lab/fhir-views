@@ -1,7 +1,9 @@
 {
   "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
-  "text": "Flat view definition for ANC Observation resource using component matching with list handling.",
-  "fhirVersion": ["4.0"],
+  "text": "Flat view definition for ANC Observation resource with updated components and extensions.",
+  "fhirVersion": [
+    "4.0"
+  ],
   "select": [
     {
       "column": [
@@ -35,20 +37,9 @@
           "name": "positive_hiv_status_before_service",
           "type": "boolean"
         },
-        
-        {
-          "path": "component.where(code.coding[0].code = '409073007').value.ofType(boolean)",
-          "name": "provided_family_planning_counseling",
-          "type": "boolean"
-        },
-        {
-          "path": "component.where(code.coding[0].code = '384469009').value.ofType(boolean)",
-          "name": "provided_infant_feeding_counseling",
-          "type": "boolean"
-        },
         {
           "path": "component.where(code.coding[0].code = '306206005').value.ofType(boolean)",
-          "name": "refered_to_ctc",
+          "name": "referred_to_ctc",
           "type": "boolean"
         },
         {
@@ -57,44 +48,147 @@
           "type": "integer"
         },
         {
-          "path": "component.where(code.coding[0].code = 'LA6577-6' and code.coding[0].display = 'HIV status of spouse' ).value.ofType(CodeableConcept).coding[0].code",
-          "name": "hiv_spouse_status_code",
+          "path": "component.where(code.coding[0].display = 'HIV status of spouse').value.ofType(CodeableConcept).coding[0].display",
+          "name": "spouse_hiv_status",
           "type": "string"
         },
         {
-          "path": "component.where(code.coding[0].code = 'LA6577-6' and code.coding[0].display = 'HIV status of spouse').value.ofType(CodeableConcept).coding[0].display",
-          "name": "hiv_spouse_status_display",
-          "type": "string"
-        },
-        {
-          "path": "component.where(code.coding[0].code = 'LA6577-6' and code.coding[0].display = 'Syphilis status of spouse').value.ofType(CodeableConcept).coding[0].code",
-          "name": "syphilis_spouse_status_code",
-          "type": "string"
-        },
-        {
-          "path": "component.where(code.coding[0].code = 'LA6577-6' and code.coding[0].display = 'Syphilis status of spouse').value.ofType(CodeableConcept).coding[0].display",
-          "name": "syphilis_spouse_status_display",
-          "type": "string"
-        },
-        {
-          "path": "component.where(code.coding[0].code = '47399-5').value.ofType(CodeableConcept).coding[0].code",
-          "name": "syphilis_status_code",
+          "path": "component.where(code.coding[0].display = 'Syphilis status of spouse').value.ofType(CodeableConcept).coding[0].display",
+          "name": "spouse_syphilis_status",
           "type": "string"
         },
         {
           "path": "component.where(code.coding[0].code = '47399-5').value.ofType(CodeableConcept).coding[0].display",
-          "name": "syphilis_status_display",
-          "type": "string"
-        },
-        {
-          "path": "component.where(code.coding[0].code = '55277-8').value.ofType(CodeableConcept).coding[0].code",
-          "name": "hiv_status_code",
+          "name": "syphilis_test_result",
           "type": "string"
         },
         {
           "path": "component.where(code.coding[0].code = '55277-8').value.ofType(CodeableConcept).coding[0].display",
-          "name": "hiv_status_display",
+          "name": "hiv_status",
           "type": "string"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'Z30.0').value.ofType(CodeableConcept).coding[0].display",
+          "name": "provided_family_planning_counseling",
+          "type": "string",
+          "multi": true
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'Z39.1').value.ofType(CodeableConcept).coding[0].display",
+          "name": "provided_infant_feeding_counselling",
+          "type": "string",
+          "multi": true
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'Z71.3').value.ofType(CodeableConcept).coding[0].display",
+          "name": "provided_nutrition_counselling",
+          "type": "string",
+          "multi": true
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-llin').value.ofType(boolean)",
+          "name": "provided_with_llin",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-ipt2').value.ofType(boolean)",
+          "name": "provided_with_ipt2",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-ipt3').value.ofType(boolean)",
+          "name": "provided_with_ipt3",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-ipt4').value.ofType(boolean)",
+          "name": "provided_with_ipt4",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-if-folic').value.ofType(boolean)",
+          "name": "provided_with_if_folic",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = 'prophylaxis-mebendazole').value.ofType(boolean)",
+          "name": "provided_with_mebendazole",
+          "type": "boolean"
+        },
+        {
+          "path": "component.where(code.coding[0].code = '16935-9').value.ofType(CodeableConcept).coding[0].display",
+          "name": "spouse_hepatitis_b_status",
+          "type": "string"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/lastAncVisitDate').value.ofType(string)",
+          "name": "last_anc_visit_date",
+          "type": "string"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/referredIn').value.ofType(boolean)",
+          "name": "referred_in",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/referredOut').value.ofType(boolean)",
+          "name": "referred_out",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/providedWithHivCounsellingBeforeLabTest').value.ofType(boolean)",
+          "name": "provided_hiv_counselling_before_lab_test",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/providedWithHivCounsellingAfterLabTest').value.ofType(boolean)",
+          "name": "provided_hiv_counselling_after_lab_test",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/hivDetails-hivTestNumber').value.ofType(integer)",
+          "name": "hiv_test_number",
+          "type": "integer"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/syphilisDetails-providedWithTreatment').value.ofType(boolean)",
+          "name": "syphilis_provided_treatment",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/diagnosedWithOtherSTDs').value.ofType(boolean)",
+          "name": "diagnosed_with_other_stds",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/providedWithTreatmentForOtherSTDs').value.ofType(boolean)",
+          "name": "provided_treatment_other_stds",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/spouseDetails-hivDetails-hivTestNumber').value.ofType(integer)",
+          "name": "spouse_hiv_test_number",
+          "type": "integer"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/spouseDetails-hepatitisB-providedWithTreatments').value.ofType(boolean)",
+          "name": "spouse_hepatitis_b_provided_treatment",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/spouseDetails-syphilisDetails-providedWithTreatment').value.ofType(boolean)",
+          "name": "spouse_syphilis_provided_treatment",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/spouseDetails-diagnosedWithOtherSTDs').value.ofType(boolean)",
+          "name": "spouse_diagnosed_with_other_stds",
+          "type": "boolean"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/spouseDetails-providedWithTreatmentForOtherSTDs').value.ofType(boolean)",
+          "name": "spouse_provided_treatment_for_other_stds",
+          "type": "boolean"
         }
       ]
     }
