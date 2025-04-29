@@ -1,7 +1,9 @@
 {
   "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
   "text": "This is the SQL-on-FHIR-v2 version of Immunization_flat.sql",
-  "fhirVersion": ["4.0"],
+  "fhirVersion": [
+    "4.0"
+  ],
   "select": [
     {
       "column": [
@@ -11,14 +13,69 @@
           "type": "string"
         },
         {
+          "path": "patient.getReferenceKey(Patient)",
+          "name": "patient_id",
+          "type": "string"
+        },
+        {
           "path": "encounter.getReferenceKey(Encounter)",
           "name": "encounter_id",
           "type": "string"
         },
         {
-          "path": "patient.getReferenceKey(Patient)",
-          "name": "patient_id",
+          "path": "vaccineCode.text",
+          "name": "vaccine_code",
           "type": "string"
+        },
+        {
+          "path": "vaccineCode.text",
+          "name": "vaccine_name",
+          "type": "string"
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "path": "occurrenceDateTime",
+          "name": "date",
+          "type": "dateTime"
+        },
+        {
+          "path": "route.coding[0].display",
+          "name": "route_display",
+          "type": "string"
+        },
+        {
+          "path": "doseQuantity.value",
+          "name": "dose_value",
+          "type": "decimal"
+        },
+        {
+          "path": "doseQuantity.unit",
+          "name": "dose_unit",
+          "type": "string"
+        },
+        {
+          "path": "primarySource",
+          "name": "primary_source",
+          "type": "boolean"
+        },
+        {
+          "path": "note[0].text",
+          "name": "note",
+          "type": "string"
+        },
+        {
+          "path": "reaction[0].detail.text",
+          "name": "reaction_notes",
+          "type": "string"
+        },
+        {
+          "path": "reaction[0].reported",
+          "name": "reaction_reported",
+          "type": "boolean"
         }
       ]
     }
