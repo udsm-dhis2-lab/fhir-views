@@ -38,6 +38,11 @@
           "type": "string"
         },
         {
+          "path": "type[0].text",
+          "name": "visit_number",
+          "type": "string"
+        },
+        {
           "path": "subject.getReferenceKey(Patient)",
           "name": "patient_id",
           "type": "string"

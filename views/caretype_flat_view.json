@@ -1,0 +1,60 @@
+{
+    "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "caretype_flat_view",
+    "title": "Flat view definition for HealthcareService resource",
+    "status": "active",
+    "publisher": "Your Organization Name",
+    "description": "A flattened view of HealthcareService resources, extracting key identification, category, name, and visit number extension.",
+    "resource": "HealthcareService",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the HealthcareService resource."
+                },
+                {
+                    "path": "category.first().coding.first().system",
+                    "name": "category_coding_system",
+                    "type": "string",
+                    "description": "System URL for the first coding of the first category."
+                },
+                {
+                    "path": "category.first().coding.first().code",
+                    "name": "category_coding_code",
+                    "type": "string",
+                    "description": "Code for the first coding of the first category."
+                },
+                {
+                    "path": "category.first().coding.first().display",
+                    "name": "category_coding_display",
+                    "type": "string",
+                    "description": "Display text for the first coding of the first category."
+                },
+                {
+                    "path": "category.first().text",
+                    "name": "category_text",
+                    "type": "string",
+                    "description": "Text representation of the first category."
+                },
+                {
+                    "path": "name",
+                    "name": "care_type",
+                    "type": "string",
+                    "description": "The name of the healthcare service."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/visitNumber').value.ofType(integer)",
+                    "name": "visit_number",
+                    "type": "integer",
+                    "description": "The visit number extracted from the specific extension."
+                }
+            ]
+        }
+    ]
+}
