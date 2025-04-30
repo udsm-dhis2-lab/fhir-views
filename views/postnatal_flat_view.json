@@ -1,0 +1,203 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "postnatal_flat",
+    "title": "Flat view definition for Postnatal Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing Postnatal Care Notes, extracting key details from components and extensions.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final, amended)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary LOINC code for the observation (e.g., 73813-0)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary LOINC code."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code for the observation (e.g., postnatal-details)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').display.first()",
+                    "name": "category_display",
+                    "type": "string",
+                    "description": "The display text for the observation category."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '42803-5')).value.ofType(boolean).first()",
+                    "name": "hiv_status_positive_before_service",
+                    "type": "boolean",
+                    "description": "Component: HIV Status (positive before service)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/maternal-child-health-codes' and code = 'hivStatusAsSeenFromAncCard')).value.ofType(boolean).first()",
+                    "name": "hiv_status_from_anc_card",
+                    "type": "boolean",
+                    "description": "Component: HIV Status As Seen From ANC Card."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '55277-8')).value.ofType(CodeableConcept).coding.first().code",
+                    "name": "hiv_status_code",
+                    "type": "string",
+                    "description": "Component: HIV status (LOINC code value)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '55277-8')).value.ofType(CodeableConcept).coding.first().display",
+                    "name": "hiv_status_display",
+                    "type": "string",
+                    "description": "Component: HIV status (LOINC display value)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '73779-3')).value.ofType(boolean).first()",
+                    "name": "referred_to_ctc",
+                    "type": "boolean",
+                    "description": "Component: Referred to CTC."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '73778-5')).value.ofType(boolean).first()",
+                    "name": "referred_to_clinic_further_services",
+                    "type": "boolean",
+                    "description": "Component: Referred to Clinic for Further Services."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '32382-7')).value.ofType(string).first()",
+                    "name": "birth_outcome",
+                    "type": "string",
+                    "description": "Component: Birth Outcome."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '9272-6')).value.ofType(integer).first()",
+                    "name": "apgar_score",
+                    "type": "integer",
+                    "description": "Component: APGAR Score."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '61149-1')).value.ofType(boolean).first()",
+                    "name": "damaged_nipples",
+                    "type": "boolean",
+                    "description": "Component: Damaged Nipples."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '77392-7')).value.ofType(boolean).first()",
+                    "name": "mastitis",
+                    "type": "boolean",
+                    "description": "Component: Mastitis."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '77391-9')).value.ofType(boolean).first()",
+                    "name": "breast_abscess",
+                    "type": "boolean",
+                    "description": "Component: Breast Abscess."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '37104-4')).value.ofType(boolean).first()",
+                    "name": "fistula",
+                    "type": "boolean",
+                    "description": "Component: Fistula."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '77385-1')).value.ofType(boolean).first()",
+                    "name": "puerperal_psychosis",
+                    "type": "boolean",
+                    "description": "Component: Puerperal Psychosis."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '73861-9')).value.ofType(integer).first()",
+                    "name": "hours_since_delivery",
+                    "type": "integer",
+                    "description": "Component: Hours Since Delivery."
+                },
+                {
+                    "path": "component.where(code.text = 'Counselling provided').value.ofType(CodeableConcept).coding.code.join(', ')",
+                    "name": "counselling_types_provided",
+                    "type": "string",
+                    "description": "Component: Comma-separated list of counselling types provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-hivDetails-hivTestNumber').value.ofType(integer)",
+                    "name": "ext_hiv_test_number",
+                    "type": "integer",
+                    "description": "Extension: HIV Test Number."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-motherAndChildOrigin').value.ofType(string)",
+                    "name": "ext_mother_child_origin",
+                    "type": "string",
+                    "description": "Extension: Mother and Child Origin."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-placeOfBirth').value.ofType(string)",
+                    "name": "ext_place_of_birth",
+                    "type": "string",
+                    "description": "Extension: Place of Birth."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-prophylaxis-providedWithAntenatalCorticosteroids').value.ofType(boolean)",
+                    "name": "ext_given_antenatal_corticosteroids",
+                    "type": "boolean",
+                    "description": "Extension: Provided with Antenatal Corticosteroids."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-prophylaxis-provideWithVitaminA').value.ofType(boolean)",
+                    "name": "ext_given_vitamin_a",
+                    "type": "boolean",
+                    "description": "Extension: Provided with Vitamin A."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-prophylaxis-providedWithFEFO').value.ofType(boolean)",
+                    "name": "ext_given_fefo",
+                    "type": "boolean",
+                    "description": "Extension: Provided with FEFO."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-daysSinceDelivery').value.ofType(integer)",
+                    "name": "ext_days_since_delivery",
+                    "type": "integer",
+                    "description": "Extension: Days Since Delivery."
+                }
+            ]
+        }
+    ]
+}
