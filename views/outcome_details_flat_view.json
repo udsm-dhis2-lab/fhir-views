@@ -1,0 +1,119 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "outcome_details_flat",
+    "title": "Flat view definition for Outcome Details Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing patient outcome details, extracting key information from components.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code for the observation (e.g., outcome-details)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').display.first()",
+                    "name": "category_display",
+                    "type": "string",
+                    "description": "The display text for the observation category."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary LOINC code for the observation (e.g., 82593-5)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary LOINC code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effectiveDateTime",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '75186-7')).value.ofType(boolean).first()",
+                    "name": "is_alive",
+                    "type": "boolean",
+                    "description": "Component: Patient alive status."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '55290-2')).value.ofType(string).first()",
+                    "name": "death_location",
+                    "type": "string",
+                    "description": "Component: Death location (if applicable)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '81956-5')).value.ofType(dateTime).first()",
+                    "name": "death_date",
+                    "type": "dateTime",
+                    "description": "Component: Date of death (if applicable)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '83023-0')).value.ofType(boolean).first()",
+                    "name": "contact_tracing_performed",
+                    "type": "boolean",
+                    "description": "Component: Contact tracing performed."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '77981-0')).value.ofType(boolean).first()",
+                    "name": "investigation_conducted",
+                    "type": "boolean",
+                    "description": "Component: Investigation conducted."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '87520-6')).value.ofType(boolean).first()",
+                    "name": "quarantined",
+                    "type": "boolean",
+                    "description": "Component: Quarantined status."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '81860-2')).value.ofType(boolean).first()",
+                    "name": "referred",
+                    "type": "boolean",
+                    "description": "Component: Referral status."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/ValueSet/otucome-category' and code = 'outcome-discharged-location')).value.ofType(string).first()",
+                    "name": "discharged_location",
+                    "type": "string",
+                    "description": "Component: Discharged location."
+                }
+            ]
+        }
+    ]
+}
