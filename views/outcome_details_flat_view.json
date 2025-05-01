@@ -60,7 +60,7 @@
                     "description": "The ID of the Encounter context."
                 },
                 {
-                    "path": "effectiveDateTime",
+                    "path": "effective.ofType(dateTime)",
                     "name": "effective_datetime",
                     "type": "dateTime",
                     "description": "The date and time the observation is effective."
