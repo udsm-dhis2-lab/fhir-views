@@ -1,0 +1,239 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "postnatal_birth_details_flat",
+    "title": "Flat view definition for Postnatal Birth Details Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing Postnatal Birth Details, extracting key details from components and extensions, including nested extensions.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code for the observation (e.g., postnatal-birth-details)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').display.first()",
+                    "name": "category_display",
+                    "type": "string",
+                    "description": "The display text for the observation category."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary LOINC code for the observation (e.g., 85353-1)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary LOINC code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "hasMember.first().getReferenceKey(Observation)",
+                    "name": "has_member_observation_id",
+                    "type": "string",
+                    "description": "The ID of the Observation referenced in hasMember."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '8339-4')).value.ofType(Quantity).value",
+                    "name": "birth_weight_kg",
+                    "type": "decimal",
+                    "description": "Component: Birth weight value in kg."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '73829-6')).value.ofType(boolean).first()",
+                    "name": "multiple_birth",
+                    "type": "boolean",
+                    "description": "Component: Multiple Birth indicator."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '73780-1')).value.ofType(integer).first()",
+                    "name": "birth_order",
+                    "type": "integer",
+                    "description": "Component: Birth order."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = 'LA19043-1')).value.ofType(boolean).first()",
+                    "name": "macerated",
+                    "type": "boolean",
+                    "description": "Component: Macerated indicator."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '11638-4')).value.ofType(boolean).first()",
+                    "name": "fresh",
+                    "type": "boolean",
+                    "description": "Component: Fresh indicator."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '57057-2')).value.ofType(boolean).first()",
+                    "name": "delivery_referred",
+                    "type": "boolean",
+                    "description": "Component: Delivery Referred indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infantFeeding').value.ofType(string)",
+                    "name": "ext_infant_feeding",
+                    "type": "string",
+                    "description": "Extension: Infant Feeding method."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-gender').value.ofType(string)",
+                    "name": "ext_gender",
+                    "type": "string",
+                    "description": "Extension: Gender of the infant."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-providedWithKmc').value.ofType(boolean)",
+                    "name": "ext_provided_with_kmc",
+                    "type": "boolean",
+                    "description": "Extension: Provided with Kangaroo Mother Care."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-hb').value.ofType(string)",
+                    "name": "ext_hb",
+                    "type": "string",
+                    "description": "Extension: HB value."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-hbigTested').value.ofType(boolean)",
+                    "name": "ext_hbig_tested",
+                    "type": "boolean",
+                    "description": "Extension: HBIG Tested indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-hivDnaPCRTested').value.ofType(boolean)",
+                    "name": "ext_hiv_dna_pcr_tested",
+                    "type": "boolean",
+                    "description": "Extension: HIV DNA PCR Tested indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-childHivStatus').value.ofType(boolean)",
+                    "name": "ext_child_hiv_status",
+                    "type": "boolean",
+                    "description": "Extension: Child HIV Status indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infections-hasSepticaemia').value.ofType(boolean)",
+                    "name": "ext_inf_has_septicaemia",
+                    "type": "boolean",
+                    "description": "Extension (Infections): Has Septicaemia."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infections-hasOmphalitis').value.ofType(boolean)",
+                    "name": "ext_inf_has_omphalitis",
+                    "type": "boolean",
+                    "description": "Extension (Infections): Has Omphalitis."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infections-hasSkinInfection').value.ofType(boolean)",
+                    "name": "ext_inf_has_skin_infection",
+                    "type": "boolean",
+                    "description": "Extension (Infections): Has Skin Infection."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infections-hasOcularInfection').value.ofType(boolean)",
+                    "name": "ext_inf_has_ocular_infection",
+                    "type": "boolean",
+                    "description": "Extension (Infections): Has Ocular Infection."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-infections-hasJaundice').value.ofType(boolean)",
+                    "name": "ext_inf_has_jaundice",
+                    "type": "boolean",
+                    "description": "Extension (Infections): Has Jaundice."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-outcomeDetails-dischargedHome').value.ofType(boolean)",
+                    "name": "ext_out_discharged_home",
+                    "type": "boolean",
+                    "description": "Extension (Outcome): Discharged Home."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-outcomeDetails-referredToNCU').value.ofType(boolean)",
+                    "name": "ext_out_referred_to_ncu",
+                    "type": "boolean",
+                    "description": "Extension (Outcome): Referred To NCU."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-outcomeDetails-referredToHospital').value.ofType(boolean)",
+                    "name": "ext_out_referred_to_hospital",
+                    "type": "boolean",
+                    "description": "Extension (Outcome): Referred To Hospital."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-outcomeDetails-referredToHealthFacility').value.ofType(boolean)",
+                    "name": "ext_out_referred_to_health_facility",
+                    "type": "boolean",
+                    "description": "Extension (Outcome): Referred To Health Facility."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newborn-birth-details').extension.where(url = 'dateOfBirth').value.ofType(dateTime)",
+                    "name": "ext_newborn_date_of_birth",
+                    "type": "dateTime",
+                    "description": "Extension (Newborn Details): Date Of Birth."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newborn-birth-details').extension.where(url = 'exclusiveBreastFed').value.ofType(boolean)",
+                    "name": "ext_newborn_exclusive_breastfed",
+                    "type": "boolean",
+                    "description": "Extension (Newborn Details): Exclusive Breastfed."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/maternal-details').extension.where(url = 'motherAgeInYears').value.ofType(integer)",
+                    "name": "ext_maternal_mother_age_years",
+                    "type": "integer",
+                    "description": "Extension (Maternal Details): Mother Age in Years."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/maternal-details').extension.where(url = 'motherHivStatus').value.ofType(string)",
+                    "name": "ext_maternal_mother_hiv_status",
+                    "type": "string",
+                    "description": "Extension (Maternal Details): Mother HIV Status."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/maternal-details').extension.where(url = 'providedWithARV').value.ofType(boolean)",
+                    "name": "ext_maternal_provided_with_arv",
+                    "type": "boolean",
+                    "description": "Extension (Maternal Details): Provided With ARV."
+                }
+            ]
+        }
+    ]
+}
