@@ -1,0 +1,143 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "contraceptive_med_statement_flat",
+    "title": "Flat view definition for Contraceptive MedicationStatement resource",
+    "status": "active",
+    "description": "A flattened view of MedicationStatement resources representing contraceptive methods provided, extracting key details from nested extensions.",
+    "resource": "MedicationStatement",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the MedicationStatement resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the MedicationStatement (e.g., active)."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "context.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the statement is effective."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pop-cycles').value.ofType(Quantity).value",
+                    "name": "ext_pop_cycles_provided",
+                    "type": "decimal",
+                    "description": "Extension: Number of POP cycles provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/coc-cycles').value.ofType(Quantity).value",
+                    "name": "ext_coc_cycles_provided",
+                    "type": "decimal",
+                    "description": "Extension: Number of COC cycles provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/sdm-provided').value.ofType(boolean)",
+                    "name": "ext_sdm_provided",
+                    "type": "boolean",
+                    "description": "Extension: SDM provided indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/lam-used').value.ofType(boolean)",
+                    "name": "ext_lam_used",
+                    "type": "boolean",
+                    "description": "Extension: LAM used indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/emergency-methods').value.ofType(boolean)",
+                    "name": "ext_emergency_methods_used",
+                    "type": "boolean",
+                    "description": "Extension: Emergency methods opted for."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/implanon-inserted').value.ofType(boolean)",
+                    "name": "ext_implanon_inserted",
+                    "type": "boolean",
+                    "description": "Extension: Implanon inserted indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/jadelle-inserted').value.ofType(boolean)",
+                    "name": "ext_jadelle_inserted",
+                    "type": "boolean",
+                    "description": "Extension: Jadelle inserted indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/implanon-removed').value.ofType(boolean)",
+                    "name": "ext_implanon_removed",
+                    "type": "boolean",
+                    "description": "Extension: Implanon removed indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/jadelle-removed').value.ofType(boolean)",
+                    "name": "ext_jadelle_removed",
+                    "type": "boolean",
+                    "description": "Extension: Jadelle removed indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/iud-received').value.ofType(boolean)",
+                    "name": "ext_iud_received",
+                    "type": "boolean",
+                    "description": "Extension: IUD received indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/iud-removed').value.ofType(boolean)",
+                    "name": "ext_iud_removed",
+                    "type": "boolean",
+                    "description": "Extension: IUD removed indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/tubal-ligation').value.ofType(boolean)",
+                    "name": "ext_tubal_ligation",
+                    "type": "boolean",
+                    "description": "Extension: Tubal ligation indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/vasectomy').value.ofType(boolean)",
+                    "name": "ext_vasectomy",
+                    "type": "boolean",
+                    "description": "Extension: Vasectomy indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/injection-received').value.ofType(boolean)",
+                    "name": "ext_injection_received",
+                    "type": "boolean",
+                    "description": "Extension: Injection received indicator."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/female-condoms-provided').value.ofType(Quantity).value",
+                    "name": "ext_female_condoms_provided",
+                    "type": "decimal",
+                    "description": "Extension: Number of female condoms provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/contraceptive-details').extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/male-condoms-provided').value.ofType(Quantity).value",
+                    "name": "ext_male_condoms_provided",
+                    "type": "decimal",
+                    "description": "Extension: Number of male condoms provided."
+                }
+            ]
+        }
+    ]
+}
