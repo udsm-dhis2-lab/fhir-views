@@ -1,0 +1,214 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "labor_family_planning_counseling_flat",
+    "title": "Flat view definition for Family Planning Counseling Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing Family Planning Counseling, extracting core details and Labour & Delivery (LD) context extensions.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code (e.g., family-planning-counseling)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/observation-category').display.first()",
+                    "name": "category_display",
+                    "type": "string",
+                    "description": "The display text for the observation category."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary LOINC code (e.g., 58142-6)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary LOINC code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "value.ofType(boolean)",
+                    "name": "counseling_provided",
+                    "type": "boolean",
+                    "description": "Value: Indicates if family planning counseling was provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-mother-origin').value.ofType(string)",
+                    "name": "ext_ld_mother_origin",
+                    "type": "string",
+                    "description": "Extension (LD): Mother's origin."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-spouse-accompaniment').value.ofType(boolean)",
+                    "name": "ext_ld_spouse_accompaniment",
+                    "type": "boolean",
+                    "description": "Extension (LD): Accompanied by spouse."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-companion-accompaniment').value.ofType(boolean)",
+                    "name": "ext_ld_companion_accompaniment",
+                    "type": "boolean",
+                    "description": "Extension (LD): Accompanied by companion."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-pregnancy-age-in-weeks').value.ofType(integer)",
+                    "name": "ext_ld_pregnancy_age_weeks",
+                    "type": "integer",
+                    "description": "Extension (LD): Pregnancy age in weeks."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-antenatal-corticosteroid-provided').value.ofType(boolean)",
+                    "name": "ext_ld_antenatal_corticosteroid_provided",
+                    "type": "boolean",
+                    "description": "Extension (LD): Antenatal corticosteroid provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-history-of-fgm').value.ofType(boolean)",
+                    "name": "ext_ld_history_of_fgm",
+                    "type": "boolean",
+                    "description": "Extension (LD): History of FGM."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-hiv-details-status').value.ofType(string)",
+                    "name": "ext_ld_hiv_details_status",
+                    "type": "string",
+                    "description": "Extension (LD HIV): HIV Status."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-hiv-details-hivTestNumber').value.ofType(integer)",
+                    "name": "ext_ld_hiv_details_test_number",
+                    "type": "integer",
+                    "description": "Extension (LD HIV): HIV Test Number."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-hiv-details-referredToCTC').value.ofType(boolean)",
+                    "name": "ext_ld_hiv_details_referred_ctc",
+                    "type": "boolean",
+                    "description": "Extension (LD HIV): Referred to CTC."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-hiv-details-ancHivStatus-numberOfTestsTaken').value.ofType(integer)",
+                    "name": "ext_ld_hiv_anc_tests_taken",
+                    "type": "integer",
+                    "description": "Extension (LD HIV ANC): Number of tests taken during ANC."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-hiv-details-ancHivStatus-status').value.ofType(string)",
+                    "name": "ext_ld_hiv_anc_status",
+                    "type": "string",
+                    "description": "Extension (LD HIV ANC): HIV status during ANC."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-providedAntibiotic').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_provided_antibiotic",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Provided antibiotic."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-providedUterotonic').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_provided_uterotonic",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Provided uterotonic."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-providedMagnesiumSulphate').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_provided_mgso4",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Provided Magnesium Sulphate."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-removedPlacenta').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_removed_placenta",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Removed placenta."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-performedMvaOrDc').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_performed_mva_dc",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Performed MVA or D&C."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-emoc-administeredBlood').value.ofType(boolean)",
+                    "name": "ext_ld_emoc_administered_blood",
+                    "type": "boolean",
+                    "description": "Extension (LD EMOC): Administered blood."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-amstl-cordTractionUsed').value.ofType(boolean)",
+                    "name": "ext_ld_amstl_cord_traction_used",
+                    "type": "boolean",
+                    "description": "Extension (LD AMSTL): Cord traction used."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-amstl-uterineMassageDone').value.ofType(boolean)",
+                    "name": "ext_ld_amstl_uterine_massage_done",
+                    "type": "boolean",
+                    "description": "Extension (LD AMSTL): Uterine massage done."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-amstl-administeredOxytocin').value.ofType(boolean)",
+                    "name": "ext_ld_amstl_administered_oxytocin",
+                    "type": "boolean",
+                    "description": "Extension (LD AMSTL): Administered Oxytocin."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-amstl-administeredEgometrine').value.ofType(boolean)",
+                    "name": "ext_ld_amstl_administered_egometrine",
+                    "type": "boolean",
+                    "description": "Extension (LD AMSTL): Administered Ergometrine."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-others-amstl-administeredMisoprostol').value.ofType(boolean)",
+                    "name": "ext_ld_amstl_administered_misoprostol",
+                    "type": "boolean",
+                    "description": "Extension (LD AMSTL): Administered Misoprostol."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/infant-feeding-counseling').value.ofType(boolean)",
+                    "name": "infant_feeding_counseling",
+                    "type": "boolean"
+                }
+            ]
+        }
+    ]
+}

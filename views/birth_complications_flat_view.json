@@ -1,0 +1,83 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "birth_complications",
+    "title": "Flat view definition for Birth Complications Condition resource",
+    "status": "active",
+    "description": "A flattened view of Condition resources representing complications related to birth.",
+    "resource": "Condition",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Condition resource."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/condition-clinical').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code (e.g., before-birth-complication)."
+                },
+                {
+                    "path": "clinicalStatus.coding.where(system = 'http://terminology.hl7.org/CodeSystem/condition-clinical').code.first()",
+                    "name": "clinical_status",
+                    "type": "string",
+                    "description": "The clinical status code (e.g., active)."
+                },
+                {
+                    "path": "verificationStatus.coding.where(system = 'http://terminology.hl7.org/CodeSystem/condition-ver-status').code.first()",
+                    "name": "verification_status",
+                    "type": "string",
+                    "description": "The verification status code (e.g., confirmed)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "condition_code",
+                    "type": "string",
+                    "description": "The LOINC code for the specific complication."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "condition_display",
+                    "type": "string",
+                    "description": "The display text for the LOINC code."
+                },
+                {
+                    "path": "code.text",
+                    "name": "condition_text",
+                    "type": "string",
+                    "description": "The text representation of the complication code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "onsetDateTime",
+                    "name": "onset_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the condition began."
+                },
+                {
+                    "path": "recordedDate",
+                    "name": "recorded_date",
+                    "type": "dateTime",
+                    "description": "The date the condition was recorded."
+                }
+            ]
+        }
+    ]
+}
