@@ -1,0 +1,185 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "cecap_screening_flat",
+    "title": "Flat view definition for CECAP Cancer Screening Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing CECAP cancer screening and treatment details, extracting core information and component results.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.where(coding.exists(code='procedure')).coding.code.first()",
+                    "name": "category_procedure_code",
+                    "type": "string",
+                    "description": "The procedure category code, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='procedure')).coding.display.first()",
+                    "name": "category_procedure_display",
+                    "type": "string",
+                    "description": "The procedure category display, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='exam')).coding.code.first()",
+                    "name": "category_exam_code",
+                    "type": "string",
+                    "description": "The exam category code, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='exam')).coding.display.first()",
+                    "name": "category_exam_display",
+                    "type": "string",
+                    "description": "The exam category display, if present."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary CECAP code for the observation."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary CECAP code."
+                },
+                {
+                    "path": "code.text",
+                    "name": "observation_text",
+                    "type": "string",
+                    "description": "The text description for the observation code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'breast-cancer-symptoms')).value.ofType(boolean).first()",
+                    "name": "comp_breast_cancer_symptoms",
+                    "type": "boolean",
+                    "description": "Component: Found with Breast Cancer Symptoms."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'breast-cancer-screened')).value.ofType(boolean).first()",
+                    "name": "comp_breast_cancer_screened",
+                    "type": "boolean",
+                    "description": "Component: Breast Cancer Screening Performed."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'cervical-cancer-suspected')).value.ofType(boolean).first()",
+                    "name": "comp_cervical_cancer_suspected",
+                    "type": "boolean",
+                    "description": "Component: Cervical Cancer Suspected."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'via-screening-performed')).value.ofType(boolean).first()",
+                    "name": "comp_via_screening_performed",
+                    "type": "boolean",
+                    "description": "Component: VIA Screening Performed."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'via-test-result')).value.ofType(boolean).first()",
+                    "name": "comp_via_test_positive",
+                    "type": "boolean",
+                    "description": "Component: VIA Test Result (Positive)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'hpv-dna-screening-performed')).value.ofType(boolean).first()",
+                    "name": "comp_hpv_dna_screening_performed",
+                    "type": "boolean",
+                    "description": "Component: HPV DNA Screening Performed."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'hpv-dna-test-result')).value.ofType(boolean).first()",
+                    "name": "comp_hpv_dna_positive",
+                    "type": "boolean",
+                    "description": "Component: HPV DNA Test Result (Positive)."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'diagnosed-with-large-lesion')).value.ofType(boolean).first()",
+                    "name": "comp_diagnosed_large_lesion",
+                    "type": "boolean",
+                    "description": "Component: Diagnosed with Large Lesion."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'diagnosed-with-small-or-moderate-lesion')).value.ofType(boolean).first()",
+                    "name": "comp_diagnosed_small_moderate_lesion",
+                    "type": "boolean",
+                    "description": "Component: Diagnosed with Small or Moderate Lesion."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'treated-with-cryo')).value.ofType(boolean).first()",
+                    "name": "comp_treated_with_cryo",
+                    "type": "boolean",
+                    "description": "Component: Treated with Cryotherapy."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'treated-with-thermo')).value.ofType(boolean).first()",
+                    "name": "comp_treated_with_thermo",
+                    "type": "boolean",
+                    "description": "Component: Treated with Thermocoagulation."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'treated-with-leep')).value.ofType(boolean).first()",
+                    "name": "comp_treated_with_leep",
+                    "type": "boolean",
+                    "description": "Component: Treated with LEEP."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'first-time-screening')).value.ofType(boolean).first()",
+                    "name": "comp_first_time_screening",
+                    "type": "boolean",
+                    "description": "Component: Patient's First Time Being Screened."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'treated-same-day')).value.ofType(boolean).first()",
+                    "name": "comp_treated_same_day",
+                    "type": "boolean",
+                    "description": "Component: Treatment Administered on Same Day as Screening."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'complications-after-treatment')).value.ofType(boolean).first()",
+                    "name": "comp_complications_after_treatment",
+                    "type": "boolean",
+                    "description": "Component: Patient Experienced Complications After Treatment."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'hiv-found-referred-ctc')).value.ofType(boolean).first()",
+                    "name": "comp_hiv_found_referred_ctc",
+                    "type": "boolean",
+                    "description": "Component: Patient Found with HIV and Referred to CTC."
+                }
+            ]
+        }
+    ]
+}
