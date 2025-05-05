@@ -24,7 +24,7 @@
                     "description": "The status of the Observation (e.g., final)."
                 },
                 {
-                    "path": "category.where(coding.exists(code='procedure')).coding.code.first()",
+                    "path": "code.where(coding.exists(system='http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes')).coding.code.first()",
                     "name": "category_procedure_code",
                     "type": "string",
                     "description": "The procedure category code, if present."
