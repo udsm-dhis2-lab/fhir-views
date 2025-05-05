@@ -1,0 +1,245 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "cpac_flat",
+    "title": "Flat view definition for Comprehensive Post-Abortion Care Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing Comprehensive Post-Abortion Care (CPAC), extracting core details and various context extensions.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.where(coding.exists(code='procedure')).coding.code.first()",
+                    "name": "category_procedure_code",
+                    "type": "string",
+                    "description": "The procedure category code, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='procedure')).coding.display.first()",
+                    "name": "category_procedure_display",
+                    "type": "string",
+                    "description": "The procedure category display, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='exam')).coding.code.first()",
+                    "name": "category_exam_code",
+                    "type": "string",
+                    "description": "The exam category code, if present."
+                },
+                {
+                    "path": "category.where(coding.exists(code='exam')).coding.display.first()",
+                    "name": "category_exam_display",
+                    "type": "string",
+                    "description": "The exam category display, if present."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cpac-codes').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary CPAC code for the observation."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cpac-codes').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary CPAC code."
+                },
+                {
+                    "path": "code.text",
+                    "name": "observation_text",
+                    "type": "string",
+                    "description": "The text description for the observation code."
+                },
+                {
+                    "path": "subject.getReferenceKey('Patient')",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey('Encounter')",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effectiveDateTime",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-pregnancyAgeInWeeks').value.ofType(integer)",
+                    "name": "ext_cpac_pregnancy_age_weeks",
+                    "type": "integer",
+                    "description": "Extension (CPAC): Pregnancy age in weeks."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-causeOfAbortion').value.ofType(string)",
+                    "name": "ext_cpac_cause_of_abortion",
+                    "type": "string",
+                    "description": "Extension (CPAC): Cause of abortion."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-afterAbortionServices').value.ofType(string)",
+                    "name": "ext_cpac_after_abortion_services",
+                    "type": "string",
+                    "description": "Extension (CPAC): After abortion services provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-positiveHIVStatusBeforeAbortion').value.ofType(boolean)",
+                    "name": "ext_cpac_positive_hiv_before_abortion",
+                    "type": "boolean",
+                    "description": "Extension (CPAC): Positive HIV status before abortion."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-hivTest-status').value.ofType(string)",
+                    "name": "ext_cpac_hiv_test_status",
+                    "type": "string",
+                    "description": "Extension (CPAC): HIV test status post-abortion."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-referReason').value.ofType(string)",
+                    "name": "ext_cpac_refer_reason",
+                    "type": "string",
+                    "description": "Extension (CPAC): Reason for referral."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionsMedications-providedWithAntibiotics').value.ofType(boolean)",
+                    "name": "ext_cpac_med_provided_antibiotics",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Meds): Provided with antibiotics."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionsMedications-providedWithPainKillers').value.ofType(boolean)",
+                    "name": "ext_cpac_med_provided_painkillers",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Meds): Provided with painkillers."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionsMedications-providedWithOxytocin').value.ofType(boolean)",
+                    "name": "ext_cpac_med_provided_oxytocin",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Meds): Provided with Oxytocin."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionsMedications-providedWithMisoprostol').value.ofType(boolean)",
+                    "name": "ext_cpac_med_provided_misoprostol",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Meds): Provided with Misoprostol."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionsMedications-providedWithIvInfusion').value.ofType(boolean)",
+                    "name": "ext_cpac_med_provided_iv_infusion",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Meds): Provided with IV infusion."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionCounselling-providedWithSTDsPreventionCounselling').value.ofType(boolean)",
+                    "name": "ext_cpac_couns_stds_prevention",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Counselling): Provided STDs prevention counselling."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionCounselling-providedWithHIVCounselling').value.ofType(boolean)",
+                    "name": "ext_cpac_couns_hiv",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Counselling): Provided HIV counselling."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-postAbortionCounselling-providedWithFamilyPlanningCounselling').value.ofType(boolean)",
+                    "name": "ext_cpac_couns_family_planning",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Counselling): Provided family planning counselling."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didReceiveOralPillsPOP').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_received_pop",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Received oral pills POP."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-popCyclesProvided').value.ofType(integer)",
+                    "name": "ext_cpac_contr_pop_cycles",
+                    "type": "integer",
+                    "description": "Extension (CPAC Contraceptives): Number of POP cycles provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didReceiveOralPillsCOC').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_received_coc",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Received oral pills COC."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-cocCyclesProvided').value.ofType(integer)",
+                    "name": "ext_cpac_contr_coc_cycles",
+                    "type": "integer",
+                    "description": "Extension (CPAC Contraceptives): Number of COC cycles provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didReceivePillCycles').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_received_pill_cycles",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Received pill cycles (general)."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-wasInsertedWithImplanon').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_inserted_implanon",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Inserted with Implanon."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-wasInsertedWithJadelle').value.ofType(integer)",
+                    "name": "ext_cpac_contr_inserted_jadelle",
+                    "type": "integer",
+                    "description": "Extension (CPAC Contraceptives): Inserted with Jadelle (check type)."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didReceiveIUD').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_received_iud",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Received IUD."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didHaveTubalLigation').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_had_tubal_ligation",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Had tubal ligation."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-didReceiveInjection').value.ofType(boolean)",
+                    "name": "ext_cpac_contr_received_injection",
+                    "type": "boolean",
+                    "description": "Extension (CPAC Contraceptives): Received injection."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-numberOfFemaleCondomsProvided').value.ofType(integer)",
+                    "name": "ext_cpac_contr_female_condoms",
+                    "type": "integer",
+                    "description": "Extension (CPAC Contraceptives): Number of female condoms provided."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-numberOfMaleCondomsProvided').value.ofType(integer)",
+                    "name": "ext_cpac_contr_male_condoms",
+                    "type": "integer",
+                    "description": "Extension (CPAC Contraceptives): Number of male condoms provided."
+                }
+            ]
+        }
+    ]
+}
