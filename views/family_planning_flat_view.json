@@ -1,0 +1,165 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "family_planning_careplan_flat",
+  "title": "Flat view definition for Family Planning CarePlan resource",
+  "status": "active",
+  "description": "A flattened view of CarePlan resources specifically for Family Planning, extracting core details and activities.",
+  "resource": "CarePlan",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the CarePlan resource."
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string",
+          "description": "The status of the CarePlan (e.g., active, completed)."
+        },
+        {
+          "path": "subject.getReferenceKey(Patient)",
+          "name": "patient_id",
+          "type": "string",
+          "description": "The ID of the Patient subject."
+        },
+        {
+          "path": "encounter.getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string",
+          "description": "The ID of the Encounter context."
+        },
+        {
+          "path": "activity.detail.code.coding.where(system = 'http://loinc.org').code.first()",
+          "name": "activity_detail_code_loinc_code",
+          "type": "string",
+          "description": "The LOINC code associated with the activity detail."
+        },
+        {
+          "path": "activity.detail.code.coding.where(system = 'http://loinc.org').display.first()",
+          "name": "activity_detail_code_loinc_display",
+          "type": "string",
+          "description": "The display text for the LOINC code associated with the activity detail."
+        },
+        {
+          "path": "activity.detail.code.coding.where(system = 'http://terminology.hl7.org/CodeSystem/service-request').code.first()",
+          "name": "activity_detail_code_servicerequest_code",
+          "type": "string",
+          "description": "The ServiceRequest code associated with the activity detail."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-positiveHivStatusBeforeService').value.ofType(boolean)",
+          "name": "ext_fp_positive_hiv_status_before",
+          "type": "boolean",
+          "description": "Extension (FP): Positive HIV status before service."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-wasCounselled').value.ofType(boolean)",
+          "name": "ext_fp_was_counselled",
+          "type": "boolean",
+          "description": "Extension (FP): Was the patient counselled."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-hasComeWithSpouse').value.ofType(boolean)",
+          "name": "ext_fp_came_with_spouse",
+          "type": "boolean",
+          "description": "Extension (FP): Did the patient come with their spouse."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-serviceLocation').value.ofType(string)",
+          "name": "ext_fp_service_location",
+          "type": "string",
+          "description": "Extension (FP): Location where the service was provided."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-referred').value.ofType(string)",
+          "name": "ext_fp_referred",
+          "type": "string",
+          "description": "Extension (FP): Referral information."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-cancerScreeningDetails-breastCancer-foundWithBreastCancerSymptoms').value.ofType(boolean)",
+          "name": "ext_fp_breast_cancer_symptoms",
+          "type": "boolean",
+          "description": "Extension (FP Cancer): Found with breast cancer symptoms."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-cancerScreeningDetails-breastCancer-screened').value.ofType(boolean)",
+          "name": "ext_fp_breast_cancer_screened",
+          "type": "boolean",
+          "description": "Extension (FP Cancer): Screened for breast cancer."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-cancerScreeningDetails-cervicalCancer-suspected').value.ofType(boolean)",
+          "name": "ext_fp_cervical_cancer_suspected",
+          "type": "boolean",
+          "description": "Extension (FP Cancer): Cervical cancer suspected."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-cancerScreeningDetails-cervicalCancer-screenedWithVIA').value.ofType(boolean)",
+          "name": "ext_fp_cervical_cancer_screened_via",
+          "type": "boolean",
+          "description": "Extension (FP Cancer): Screened for cervical cancer with VIA."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-cancerScreeningDetails-cervicalCancer-viaTestPositive').value.ofType(boolean)",
+          "name": "ext_fp_cervical_cancer_via_positive",
+          "type": "boolean",
+          "description": "Extension (FP Cancer): VIA test positive for cervical cancer."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-hivStatus-status').value.ofType(string)",
+          "name": "ext_fp_hiv_status",
+          "type": "string",
+          "description": "Extension (FP HIV): Patient's HIV status."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-hivStatus-referredToCTC').value.ofType(boolean)",
+          "name": "ext_fp_hiv_referred_ctc",
+          "type": "boolean",
+          "description": "Extension (FP HIV): Patient referred to CTC."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-spouseHivStatus-status').value.ofType(string)",
+          "name": "ext_fp_spouse_hiv_status",
+          "type": "string",
+          "description": "Extension (FP HIV): Spouse's HIV status."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-spouseHivStatus-referredToCTC').value.ofType(boolean)",
+          "name": "ext_fp_spouse_hiv_referred_ctc",
+          "type": "boolean",
+          "description": "Extension (FP HIV): Spouse referred to CTC."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-breastFeeding').value.ofType(boolean)",
+          "name": "ext_fp_breastfeeding",
+          "type": "boolean",
+          "description": "Extension (FP): Patient is currently breastfeeding."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-sideEffects-bleeding').value.ofType(boolean)",
+          "name": "ext_fp_sideeffect_bleeding",
+          "type": "boolean",
+          "description": "Extension (FP Side Effects): Experiencing bleeding."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-sideEffects-headache').value.ofType(boolean)",
+          "name": "ext_fp_sideeffect_headache",
+          "type": "boolean",
+          "description": "Extension (FP Side Effects): Experiencing headache."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-sideEffects-gotPregnancy').value.ofType(boolean)",
+          "name": "ext_fp_sideeffect_got_pregnancy",
+          "type": "boolean",
+          "description": "Extension (FP Side Effects): Got pregnant while using method."
+        }
+      ]
+    }
+  ]
+}
