@@ -24,7 +24,7 @@
                     "description": "The status of the Observation (e.g., final)."
                 },
                 {
-                    "path": "category.where(coding.exists(code='procedure')).coding.code.first()",
+                    "path": "code.where(coding.exists(system='http://fhir.moh.go.tz/fhir/CodeSystem/cpac-codes')).coding.code.first()",
                     "name": "category_procedure_code",
                     "type": "string",
                     "description": "The procedure category code, if present."
@@ -66,13 +66,13 @@
                     "description": "The text description for the observation code."
                 },
                 {
-                    "path": "subject.getReferenceKey('Patient')",
+                    "path": "subject.getReferenceKey(Patient)",
                     "name": "patient_id",
                     "type": "string",
                     "description": "The ID of the Patient subject."
                 },
                 {
-                    "path": "encounter.getReferenceKey('Encounter')",
+                    "path": "encounter.getReferenceKey(Encounter)",
                     "name": "encounter_id",
                     "type": "string",
                     "description": "The ID of the Encounter context."
