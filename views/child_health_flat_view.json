@@ -1,0 +1,143 @@
+{
+    "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+    "name": "child_health_flat",
+    "title": "Flat view definition for Child Health Observation resource",
+    "status": "active",
+    "description": "A flattened view of Observation resources representing Child Health clinical information, extracting core details, components, and prophylaxis/feeding/HIV extensions.",
+    "resource": "Observation",
+    "fhirVersion": [
+        "4.0.1"
+    ],
+    "select": [
+        {
+            "column": [
+                {
+                    "path": "getResourceKey()",
+                    "name": "id",
+                    "type": "string",
+                    "description": "The logical ID of the Observation resource."
+                },
+                {
+                    "path": "status",
+                    "name": "status",
+                    "type": "string",
+                    "description": "The status of the Observation (e.g., final)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').code.first()",
+                    "name": "category_code",
+                    "type": "string",
+                    "description": "The category code (e.g., child-health)."
+                },
+                {
+                    "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').display.first()",
+                    "name": "category_display",
+                    "type": "string",
+                    "description": "The display text for the observation category."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').code.first()",
+                    "name": "observation_code",
+                    "type": "string",
+                    "description": "The primary LOINC code for the observation (e.g., 55752-0)."
+                },
+                {
+                    "path": "code.coding.where(system = 'http://loinc.org').display.first()",
+                    "name": "observation_display",
+                    "type": "string",
+                    "description": "The display text for the primary LOINC code."
+                },
+                {
+                    "path": "subject.getReferenceKey(Patient)",
+                    "name": "patient_id",
+                    "type": "string",
+                    "description": "The ID of the Patient subject."
+                },
+                {
+                    "path": "encounter.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string",
+                    "description": "The ID of the Encounter context."
+                },
+                {
+                    "path": "effective.ofType(dateTime)",
+                    "name": "effective_datetime",
+                    "type": "dateTime",
+                    "description": "The date and time the observation is effective."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '55277-8')).value.ofType(CodeableConcept).coding.first().code",
+                    "name": "mother_hiv_status_code",
+                    "type": "string",
+                    "description": "Component: Mother's HIV status code."
+                },
+                {
+                    "path": "component.where(code.coding.exists(system = 'http://loinc.org' and code = '55277-8')).value.ofType(CodeableConcept).coding.first().display",
+                    "name": "mother_hiv_status_display",
+                    "type": "string",
+                    "description": "Component: Mother's HIV status display."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-albendazole-administered').value.ofType(boolean)",
+                    "name": "ext_proph_albendazole_administered",
+                    "type": "boolean",
+                    "description": "Extension (Prophylaxis): Albendazole administered."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-albendazole-serviceModality').value.ofType(string)",
+                    "name": "ext_proph_albendazole_modality",
+                    "type": "string",
+                    "description": "Extension (Prophylaxis): Albendazole service modality."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-vitaminA-administered').value.ofType(boolean)",
+                    "name": "ext_proph_vitamin_a_administered",
+                    "type": "boolean",
+                    "description": "Extension (Prophylaxis): Vitamin A administered."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-vitaminA-serviceModality').value.ofType(string)",
+                    "name": "ext_proph_vitamin_a_modality",
+                    "type": "string",
+                    "description": "Extension (Prophylaxis): Vitamin A service modality."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-providedWithLLIN').value.ofType(boolean)",
+                    "name": "ext_proph_provided_llin",
+                    "type": "boolean",
+                    "description": "Extension (Prophylaxis): Provided with LLIN."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-infantFeeding').value.ofType(string)",
+                    "name": "ext_infant_feeding",
+                    "type": "string",
+                    "description": "Extension: Infant feeding method."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-providedWithInfantFeedingCounselling').value.ofType(boolean)",
+                    "name": "ext_infant_feeding_counseling_provided",
+                    "type": "boolean",
+                    "description": "Extension: Provided with infant feeding counselling."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-isStillBreastFed').value.ofType(boolean)",
+                    "name": "ext_is_still_breastfed",
+                    "type": "boolean",
+                    "description": "Extension: Is child still breastfed."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-referredToCTC').value.ofType(boolean)",
+                    "name": "ext_referred_to_ctc",
+                    "type": "boolean",
+                    "description": "Extension: Referred to CTC."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-motherHivstatus-testingDate').value.ofType(string)",
+                    "name": "ext_mother_hiv_testing_date",
+                    "type": "string",
+                    "description": "Extension: Mother's HIV testing date."
+                }
+            ]
+        }
+    ]
+}
