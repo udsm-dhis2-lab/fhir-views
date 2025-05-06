@@ -204,9 +204,9 @@
                     "description": "Extension (CPAC Contraceptives): Inserted with Implanon."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-wasInsertedWithJadelle').value.ofType(integer)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/cpac-contraceptives-wasInsertedWithJadelle').value.ofType(boolean)",
                     "name": "ext_cpac_contr_inserted_jadelle",
-                    "type": "integer",
+                    "type": "boolean",
                     "description": "Extension (CPAC Contraceptives): Inserted with Jadelle (check type)."
                 },
                 {
