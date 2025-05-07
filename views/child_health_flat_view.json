@@ -84,22 +84,25 @@
                     "description": "Extension (Prophylaxis): Albendazole administered."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-albendazole-serviceModality').value.ofType(string)",
-                    "name": "ext_proph_albendazole_modality",
-                    "type": "string",
-                    "description": "Extension (Prophylaxis): Albendazole service modality."
-                },
-                {
                     "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-vitaminA-administered').value.ofType(boolean)",
                     "name": "ext_proph_vitamin_a_administered",
                     "type": "boolean",
                     "description": "Extension (Prophylaxis): Vitamin A administered."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-vitaminA-serviceModality').value.ofType(string)",
-                    "name": "ext_proph_vitamin_a_modality",
-                    "type": "string",
-                    "description": "Extension (Prophylaxis): Vitamin A service modality."
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-serviceModality').value.ofType(string)",
+                    "name": "service_location",
+                    "type": "string"
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-hasBeenBreastFedFor24Month').value.ofType(boolean)",
+                    "name": "has_been_breast_fed_for_24",
+                    "type": "boolean"
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-motherAge').value.ofType(integer)",
+                    "name": "mother_age",
+                    "type": "integer"
                 },
                 {
                     "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-prophylaxis-providedWithLLIN').value.ofType(boolean)",
