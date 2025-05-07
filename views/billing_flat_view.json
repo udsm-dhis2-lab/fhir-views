@@ -69,6 +69,16 @@
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'standardCode').value.ofType(string)",
           "name": "standard_code",
           "type": "string"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'insuranceCode').value.ofType(string)",
+          "name": "insurance_code",
+          "type": "string"
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/billing-details').extension.where(url = 'insuranceName').value.ofType(string)",
+          "name": "insurance_name",
+          "type": "string"
         }
       ]
     }
