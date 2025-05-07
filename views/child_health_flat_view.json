@@ -139,7 +139,23 @@
                     "name": "ext_mother_hiv_testing_date",
                     "type": "string",
                     "description": "Extension: Mother's HIV testing date."
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-ratio-weight-age').value.ofType(decimal)",
+                    "name": "weight_age_ratio",
+                    "type": "decimal"
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-ratio-weight-height').value.ofType(decimal)",
+                    "name": "weight_height_ratio",
+                    "type": "decimal"
+                },
+                {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ch-ratio-height-age').value.ofType(decimal)",
+                    "name": "height_age_ratio",
+                    "type": "decimal"
                 }
+
             ]
         }
     ]
