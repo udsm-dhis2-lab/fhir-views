@@ -58,6 +58,11 @@
           "type": "dateTime"
         },
         {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/visitDetails-referredIn').value.ofType(boolean)",
+          "name": "referred_in",
+          "type": "boolean"
+        },
+        {
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/newThisYear').value.ofType(boolean)",
           "name": "new_this_year",
           "type": "boolean"

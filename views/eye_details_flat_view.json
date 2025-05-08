@@ -1,0 +1,87 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "eye_details_observation_flat",
+  "title": "Flat view definition for Eye Details Observation resource",
+  "status": "active",
+  "description": "A flattened view of Observation resources specifically for Eye Clinic Examinations, extracting core details and eye-specific extensions.",
+  "resource": "Observation",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the Observation resource."
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string",
+          "description": "The status of the Observation (e.g., final, preliminary)."
+        },
+        {
+          "path": "subject.getReferenceKey(Patient)",
+          "name": "patient_id",
+          "type": "string",
+          "description": "The ID of the Patient subject."
+        },
+        {
+          "path": "encounter.getReferenceKey(Encounter)",
+          "name": "encounter_id",
+          "type": "string",
+          "description": "The ID of the Encounter context."
+        },
+        {
+          "path": "effectiveDateTime",
+          "name": "effective_date_time",
+          "type": "dateTime",
+          "description": "The date and time the observation was made."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-refracted').value.ofType(boolean)",
+          "name": "ext_eye_refracted",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if the eye was refracted."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-spectaclesPrescribed').value.ofType(boolean)",
+          "name": "ext_eye_spectacles_prescribed",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if spectacles were prescribed."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-spectacleDispensed').value.ofType(boolean)",
+          "name": "ext_eye_spectacle_dispensed",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if spectacles were dispensed."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-contactLenseDispensed').value.ofType(boolean)",
+          "name": "ext_eye_contact_lense_dispensed",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if contact lenses were dispensed."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-diagnosedWithLowVisionI').value.ofType(boolean)",
+          "name": "ext_eye_diagnosed_with_low_vision_I",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if diagnosed with a low vision device I."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-diagnosedWithLowVisionII').value.ofType(boolean)",
+          "name": "ext_eye_diagnosed_with_low_vision_II",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if diagnosed with a low vision device II."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-isDispensedWithLowVisionDevice').value.ofType(boolean)",
+          "name": "ext_eye_is_dispensed_with_low_vision_device",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if a low vision device was dispensed."
+        }
+      ]
+    }
+  ]
+}
