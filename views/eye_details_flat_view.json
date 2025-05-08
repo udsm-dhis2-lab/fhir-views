@@ -76,6 +76,12 @@
           "description": "Extension (Eye): Indicates if diagnosed with a low vision device II."
         },
         {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-prescribedWithLowVision').value.ofType(boolean)",
+          "name": "ext_eye_prescribed_with_low_vision",
+          "type": "boolean",
+          "description": "Extension (Eye): Indicates if diagnosed with a low vision device II."
+        },
+        {
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/eye-isDispensedWithLowVisionDevice').value.ofType(boolean)",
           "name": "ext_eye_is_dispensed_with_low_vision_device",
           "type": "boolean",
