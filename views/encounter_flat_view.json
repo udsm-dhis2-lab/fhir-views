@@ -91,9 +91,14 @@
           "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/providedComplaints').value.ofType(boolean)",
           "name": "provided_complaints",
           "type": "boolean"
-        },
+        }
+      ]
+    },
+    {
+      "forEachOrNull": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/complaints')",
+      "column": [
         {
-          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/complaints').value.ofType(string)",
+          "path": "value.ofType(string)",
           "name": "complaints",
           "type": "string"
         }
