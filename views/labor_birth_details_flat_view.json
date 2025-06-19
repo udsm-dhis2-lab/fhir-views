@@ -180,9 +180,9 @@
                     "description": "Extension (Maternal Details): Mother Age in Years."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/maternal-details').extension.where(url = 'motherHivStatus').value.ofType(string)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/maternal-details').extension.where(url = 'motherHivStatus').value.ofType(boolean)",
                     "name": "ext_maternal_mother_hiv_status",
-                    "type": "string",
+                    "type": "boolean",
                     "description": "Extension (Maternal Details): Mother HIV Status."
                 },
                 {
