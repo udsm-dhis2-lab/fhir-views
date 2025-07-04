@@ -13,7 +13,7 @@
           "type": "string"
         },
         {
-          "path": "id",
+          "path": "identifier.where(type.coding.code='VISIT-NUMBER').value",
           "name": "logical_id",
           "type": "string"
         },
