@@ -8,8 +8,13 @@
     {
       "column": [
         {
-          "path": "id",
+          "path": "getResourceKey()",
           "name": "id",
+          "type": "string"
+        },
+        {
+          "path": "id",
+          "name": "logical_id",
           "type": "string"
         },
         {
