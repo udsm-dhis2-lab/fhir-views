@@ -28,6 +28,11 @@
                     "description": "System URL for the first coding of the first category."
                 },
                 {
+                    "path": "context.getReferenceKey(Encounter)",
+                    "name": "encounter_id",
+                    "type": "string"
+                },
+                {
                     "path": "category.first().coding.first().code",
                     "name": "category_coding_code",
                     "type": "string",
