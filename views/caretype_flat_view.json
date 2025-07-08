@@ -1,6 +1,6 @@
 {
     "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
-    "name": "caretype_flat_view",
+    "name": "healthcare_service_flat",
     "title": "Flat view definition for Observation (Care Service) resource",
     "status": "active",
     "publisher": "Your Organization Name",
