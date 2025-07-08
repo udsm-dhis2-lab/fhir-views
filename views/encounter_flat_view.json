@@ -13,14 +13,9 @@
           "type": "string"
         },
         {
-          "path": "id",
-          "name": "logical_id",
-          "type": "string"
-        },
-        {
-          "path": "fhir_id",
+          "path": "identifier.where(type.coding.code='VISIT-NUMBER').value",
           "name": "encounter_id",
-          "sql": "SELECT fhir_id FROM hfj_resource WHERE res_type = 'Encounter' AND res_id = id"
+          "type": "string"
         },
         {
           "path": "status",
