@@ -28,7 +28,7 @@
                     "description": "System URL for the first coding of the first category."
                 },
                 {
-                    "path": "context.getReferenceKey(Encounter)",
+                    "path": "encounter.getReferenceKey(Encounter)",
                     "name": "encounter_id",
                     "type": "string"
                 },
