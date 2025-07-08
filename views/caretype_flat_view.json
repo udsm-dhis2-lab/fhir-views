@@ -1,22 +1,25 @@
 {
     "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
     "name": "caretype_flat_view",
-    "title": "Flat view definition for HealthcareService resource",
+    "title": "Flat view definition for Observation (Care Service) resource",
     "status": "active",
     "publisher": "Your Organization Name",
-    "description": "A flattened view of HealthcareService resources, extracting key identification, category, name, and visit number extension.",
-    "resource": "HealthcareService",
+    "description": "A flattened view of Observation resources representing care services. It extracts key identification, category, and care service details from the component array.",
+    "resource": "Observation",
     "fhirVersion": [
         "4.0.1"
     ],
     "select": [
         {
+            "where": [
+                "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category' and code = 'care-services').exists()"
+            ],
             "column": [
                 {
                     "path": "getResourceKey()",
                     "name": "id",
                     "type": "string",
-                    "description": "The logical ID of the HealthcareService resource."
+                    "description": "The logical ID of the Observation resource."
                 },
                 {
                     "path": "category.first().coding.first().system",
@@ -43,16 +46,16 @@
                     "description": "Text representation of the first category."
                 },
                 {
-                    "path": "name",
+                    "path": "component.where(code.coding.first().code = 'CARE-SERVICE-TYPE').first().value.ofType(string)",
                     "name": "care_type",
                     "type": "string",
-                    "description": "The name of the healthcare service."
+                    "description": "The type of care service, extracted from the 'CARE-SERVICE-TYPE' component."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/visitNumber').value.ofType(integer)",
+                    "path": "component.where(code.coding.first().code = 'CARE-SERVICE-VISIT-NUMBER').first().value.ofType(integer)",
                     "name": "visit_number",
                     "type": "integer",
-                    "description": "The visit number extracted from the specific extension."
+                    "description": "The visit number, extracted from the 'CARE-SERVICE-VISIT-NUMBER' component."
                 }
             ]
         }
