@@ -126,9 +126,9 @@
                     "description": "Extension: Provided with Kangaroo Mother Care."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-hb').value.ofType(string)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/pnc-birthdetails-hb').value.ofType(integer)",
                     "name": "ext_hb",
-                    "type": "string",
+                    "type": "integer",
                     "description": "Extension: HB value."
                 },
                 {
