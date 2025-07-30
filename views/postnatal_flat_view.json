@@ -72,9 +72,9 @@
                     "description": "Component: HIV Status (positive before service)."
                 },
                 {
-                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/maternal-child-health-codes' and code = 'hivStatusAsSeenFromAncCard')).value.ofType(boolean).first()",
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/maternal-child-health-codes' and code = 'hivStatusAsSeenFromAncCard')).value.ofType(string).first()",
                     "name": "hiv_status_from_anc_card",
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Component: HIV Status As Seen From ANC Card."
                 },
                 {
