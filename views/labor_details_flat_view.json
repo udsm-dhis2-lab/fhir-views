@@ -53,17 +53,17 @@
                     "type": "dateTime"
                 },
                 {
-                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/placeOfBirth').value.ofType(string)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/placeOfBirth').value.ofType(string)",
                     "name": "place_of_birth",
                     "type": "string"
                 },
                 {
-                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/timeBetweenLaborPainAndDeliveryInHrs').value.ofType(decimal)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/timeBetweenLaborPainAndDeliveryInHrs').value.ofType(decimal)",
                     "name": "time_between_labor_pain_and_delivery_in_hrs",
                     "type": "decimal"
                 },
                 {
-                    "path": "extension.where(url = 'https://fhir.dhis2.udsm.ac.tz/fhir/StructureDefinition/isAttendantSkilled').value.ofType(boolean)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/isAttendantSkilled').value.ofType(boolean)",
                     "name": "is_attendant_skilled",
                     "type": "boolean"
                 }
