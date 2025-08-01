@@ -108,9 +108,9 @@
                     "description": "Extension: HIV DNA PCR Tested indicator."
                 },
                 {
-                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-birthDetails-childHivStatus').value.ofType(boolean)",
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-birthDetails-childHivStatus').value.ofType(string)",
                     "name": "ext_child_hiv_status",
-                    "type": "boolean",
+                    "type": "string",
                     "description": "Extension: Child HIV Status indicator."
                 },
                 {
