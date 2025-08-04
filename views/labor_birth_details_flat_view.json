@@ -90,6 +90,12 @@
                     "description": "Extension: Macerated indicator."
                 },
                 {
+                    "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-birthDetails-gender').value.ofType(string)",
+                    "name": "ext_gender",
+                    "type": "string",
+                    "description": "Extension: Gender."
+                },
+                {
                     "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/ld-birthDetails-fresh').value.ofType(boolean)",
                     "name": "ext_fresh",
                     "type": "boolean",
