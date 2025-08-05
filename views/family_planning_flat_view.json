@@ -5,7 +5,9 @@
   "status": "active",
   "description": "A flattened view of CarePlan resources specifically for Family Planning, extracting core details and activities.",
   "resource": "CarePlan",
-  "fhirVersion": ["4.0.1"],
+  "fhirVersion": [
+    "4.0.1"
+  ],
   "select": [
     {
       "column": [
@@ -76,9 +78,9 @@
           "description": "Extension (FP): Location where the service was provided."
         },
         {
-          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-referred').value.ofType(string)",
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/fp-referred').value.ofType(boolean)",
           "name": "ext_fp_referred",
-          "type": "string",
+          "type": "boolean",
           "description": "Extension (FP): Referral information."
         },
         {
