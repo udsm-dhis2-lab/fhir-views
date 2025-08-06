@@ -36,18 +36,6 @@
                     "description": "The procedure category display, if present."
                 },
                 {
-                    "path": "category.where(coding.exists(code='exam')).coding.code.first()",
-                    "name": "category_exam_code",
-                    "type": "string",
-                    "description": "The exam category code, if present."
-                },
-                {
-                    "path": "category.where(coding.exists(code='exam')).coding.display.first()",
-                    "name": "category_exam_display",
-                    "type": "string",
-                    "description": "The exam category display, if present."
-                },
-                {
                     "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes').code.first()",
                     "name": "observation_code",
                     "type": "string",
