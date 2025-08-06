@@ -24,14 +24,14 @@
                     "description": "The status of the Observation (e.g., final)."
                 },
                 {
-                    "path": "code.where(coding.exists(system='http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes')).coding.code.first()",
+                    "path": "code.where(coding.exists(system='http://terminology.hl7.org/CodeSystem/observation-category')).coding.code.first()",
                     "name": "category_procedure_code",
                     "type": "string",
                     "description": "The procedure category code, if present."
                 },
                 {
                     "path": "category.where(coding.exists(code='procedure')).coding.display.first()",
-                    "name": "category_procedure_display",
+                    "name": "cecap-cancer-screening",
                     "type": "string",
                     "description": "The procedure category display, if present."
                 },
