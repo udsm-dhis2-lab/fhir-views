@@ -84,6 +84,12 @@
                     "description": "The date and time the observation is effective."
                 },
                 {
+                    "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'cecap-hiv-status')).value.ofType(string).first()",
+                    "name": "comp_hiv_status",
+                    "type": "string",
+                    "description": "Component: HIV Status."
+                },
+                {
                     "path": "component.where(code.coding.exists(system = 'http://fhir.moh.go.tz/fhir/CodeSystem/cecap-codes' and code = 'breast-cancer-symptoms')).value.ofType(boolean).first()",
                     "name": "comp_breast_cancer_symptoms",
                     "type": "boolean",
