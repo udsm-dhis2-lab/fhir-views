@@ -31,7 +31,7 @@
                 },
                 {
                     "path": "category.where(coding.exists(code='procedure')).coding.display.first()",
-                    "name": "cecap-cancer-screening",
+                    "name": "cecap_cancer_screening",
                     "type": "string",
                     "description": "The procedure category display, if present."
                 },
