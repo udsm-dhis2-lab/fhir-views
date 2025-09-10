@@ -26,9 +26,9 @@
           "type": "string"
         },
         {
-          "path": "deceased",
-          "name": "deceased",
-          "type": "boolean"
+          "path": "deceasedDateTime",
+          "name": "deceased_date_time",
+          "type": "date"
         },
         {
           "path": "birthDate",
