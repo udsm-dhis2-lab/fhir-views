@@ -1,0 +1,183 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_request_specimen_flat",
+  "title": "Flat view definition for Specimen (Lab Request) resource",
+  "status": "active",
+  "description": "A flattened view of Specimen resources representing lab request information, extracting specimen details, collection information, and custom extensions.",
+  "resource": "Specimen",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the Specimen resource."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:lab-request:specimen-id').value.first()",
+          "name": "specimen_id",
+          "type": "string",
+          "description": "The specimen identifier value."
+        },
+        {
+          "path": "type.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/typeOfSpecimen').code.first()",
+          "name": "specimen_type_code",
+          "type": "string",
+          "description": "The type of specimen code."
+        },
+        {
+          "path": "type.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/typeOfSpecimen').display.first()",
+          "name": "specimen_type_display",
+          "type": "string",
+          "description": "The type of specimen display text."
+        },
+        {
+          "path": "type.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/specimenSite').code.first()",
+          "name": "specimen_site_code",
+          "type": "string",
+          "description": "The specimen collection site code."
+        },
+        {
+          "path": "type.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/specimenSite').display.first()",
+          "name": "specimen_site_display",
+          "type": "string",
+          "description": "The specimen collection site display text."
+        },
+        {
+          "path": "receivedTime",
+          "name": "received_time",
+          "type": "dateTime",
+          "description": "The date and time the specimen was received."
+        },
+        {
+          "path": "collection.collector.getReferenceKey(Practitioner)",
+          "name": "collector_practitioner_id",
+          "type": "string",
+          "description": "The ID of the Practitioner who collected the specimen."
+        },
+        {
+          "path": "collection.collected.ofType(dateTime)",
+          "name": "collected_datetime",
+          "type": "dateTime",
+          "description": "The date and time the specimen was collected."
+        },
+        {
+          "path": "collection.quantity.value",
+          "name": "collection_volume_ml",
+          "type": "decimal",
+          "description": "The volume of specimen collected in milliliters."
+        },
+        {
+          "path": "note.first().text",
+          "name": "clinical_notes",
+          "type": "string",
+          "description": "Clinical notes associated with the specimen."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/requesting-facility/careType').value.ofType(string)",
+          "name": "requesting_facility_care_type",
+          "type": "string",
+          "description": "Extension: Requesting facility care type."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/requesting-facility/code').value.ofType(string)",
+          "name": "requesting_facility_code",
+          "type": "string",
+          "description": "Extension: Requesting facility code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/dateOccurred').value.ofType(string)",
+          "name": "date_occurred",
+          "type": "string",
+          "description": "Extension: Date the event occurred."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/specimentCollectedFrom').value.ofType(string)",
+          "name": "specimen_collected_from",
+          "type": "string",
+          "description": "Extension: Location/source specimen was collected from."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/specimenSentToLab').value.ofType(boolean)",
+          "name": "specimen_sent_to_lab",
+          "type": "boolean",
+          "description": "Extension: Whether specimen was sent to lab."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/dateTimeSpecimenSentToLab').value.ofType(dateTime)",
+          "name": "datetime_sent_to_lab",
+          "type": "dateTime",
+          "description": "Extension: Date and time specimen was sent to lab."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/specimenRegisteredBy').value.ofType(string)",
+          "name": "specimen_registered_by",
+          "type": "string",
+          "description": "Extension: Person who registered the specimen."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/dateTimeSpecimenRegistered').value.ofType(dateTime)",
+          "name": "datetime_registered",
+          "type": "dateTime",
+          "description": "Extension: Date and time specimen was registered."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/requestTypeCode').value.ofType(string)",
+          "name": "request_type_code",
+          "type": "string",
+          "description": "Extension: Lab request type code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/referringSpecimenId').value.ofType(string)",
+          "name": "referring_specimen_id",
+          "type": "string",
+          "description": "Extension: Referring specimen identifier."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/clinicalCodes').value.ofType(string)",
+          "name": "clinical_codes",
+          "type": "string",
+          "description": "Extension: Clinical codes (pipe-separated)."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/receivingFacility/code').value.ofType(string)",
+          "name": "receiving_facility_code",
+          "type": "string",
+          "description": "Extension: Receiving facility code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/receivingFacility/section').value.ofType(string)",
+          "name": "receiving_facility_section",
+          "type": "string",
+          "description": "Extension: Receiving facility section."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/StructureDefinition/reportDetails').value.ofType(string)",
+          "name": "report_details",
+          "type": "string",
+          "description": "Extension: Report details (reporting date/datetime)."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/facilityDetails').value.ofType(CodeableConcept).coding.first().code",
+          "name": "facility_system_version",
+          "type": "string",
+          "description": "Extension: Facility system version code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/facilityDetails').value.ofType(CodeableConcept).coding.first().display",
+          "name": "facility_system_name",
+          "type": "string",
+          "description": "Extension: Facility system name."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/facilityDetails').value.ofType(CodeableConcept).text",
+          "name": "performing_facility_code",
+          "type": "string",
+          "description": "Extension: Performing facility code."
+        }
+      ]
+    }
+  ]
+}

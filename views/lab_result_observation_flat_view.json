@@ -1,0 +1,183 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_result_observation_flat",
+  "title": "Flat view definition for Observation (Lab Result) resource",
+  "status": "active",
+  "description": "A flattened view of Observation resources representing lab test results, extracting test details, specimen information, performers, and result-specific extensions.",
+  "resource": "Observation",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the Observation resource."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:obr-set-id').value.first()",
+          "name": "obr_set_id",
+          "type": "string",
+          "description": "The OBR set identifier value."
+        },
+        {
+          "path": "basedOn.first().reference",
+          "name": "based_on_service_request",
+          "type": "string",
+          "description": "Reference to the ServiceRequest this observation is based on."
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string",
+          "description": "The status of the observation (e.g., final, preliminary)."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').code.first()",
+          "name": "category_code",
+          "type": "string",
+          "description": "The category code (e.g., lab-result)."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').display.first()",
+          "name": "category_display",
+          "type": "string",
+          "description": "The display text for the observation category."
+        },
+        {
+          "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/typeOfTest').code.first()",
+          "name": "test_type_code",
+          "type": "string",
+          "description": "The code for the type of lab test."
+        },
+        {
+          "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/typeOfTest').display.first()",
+          "name": "test_type_display",
+          "type": "string",
+          "description": "The display text for the type of lab test."
+        },
+        {
+          "path": "specimen.getReferenceKey(Specimen)",
+          "name": "specimen_id",
+          "type": "string",
+          "description": "The ID of the associated Specimen resource."
+        },
+        {
+          "path": "effective.ofType(dateTime)",
+          "name": "effective_datetime",
+          "type": "dateTime",
+          "description": "The date and time the specimen was analyzed."
+        },
+        {
+          "path": "issued",
+          "name": "issued_datetime",
+          "type": "dateTime",
+          "description": "The date and time the results were authorized/issued."
+        },
+        {
+          "path": "performer.where(resolve().resourceType = 'Practitioner').getReferenceKey(Practitioner)",
+          "name": "performer_practitioner_id",
+          "type": "string",
+          "description": "The ID of the Practitioner performer."
+        },
+        {
+          "path": "performer.where(resolve().resourceType = 'Organization').getReferenceKey(Organization)",
+          "name": "performer_organization_id",
+          "type": "string",
+          "description": "The ID of the Organization performer."
+        },
+        {
+          "path": "device.getReferenceKey(Device)",
+          "name": "device_id",
+          "type": "string",
+          "description": "The ID of the Device (analyzer) used for the test."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/specimenAcceptanceStatus').value.ofType(string)",
+          "name": "specimen_acceptance_status",
+          "type": "string",
+          "description": "Extension: Specimen acceptance status."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/specimenRejectionCodes').value.ofType(CodeableConcept).coding.code",
+          "name": "specimen_rejection_codes",
+          "type": "string",
+          "description": "Extension: Specimen rejection codes (may contain multiple values)."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/specimenRejectionCodes').value.ofType(CodeableConcept).coding.display",
+          "name": "specimen_rejection_displays",
+          "type": "string",
+          "description": "Extension: Specimen rejection code display texts."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/testOrderDate').value.ofType(dateTime)",
+          "name": "test_order_date",
+          "type": "dateTime",
+          "description": "Extension: Date the test was ordered."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result-status/code').value.ofType(string)",
+          "name": "result_status_code",
+          "type": "string",
+          "description": "Extension: Result status code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result-status/codeType').value.ofType(string)",
+          "name": "result_status_code_type",
+          "type": "string",
+          "description": "Extension: Result status code type."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/testResultDate').value.ofType(dateTime)",
+          "name": "test_result_date",
+          "type": "dateTime",
+          "description": "Extension: Date the test result was finalized."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/performingFacility').value.ofType(string)",
+          "name": "performing_facility_code",
+          "type": "string",
+          "description": "Extension: Code of the facility performing the test."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/referringSpecimenId').value.ofType(string)",
+          "name": "referring_specimen_id",
+          "type": "string",
+          "description": "Extension: Referring specimen identifier."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/dateTimeResultsRegistered').value.ofType(dateTime)",
+          "name": "datetime_results_registered",
+          "type": "dateTime",
+          "description": "Extension: Date and time results were registered."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/resultsAuthorisedBy').value.ofType(string)",
+          "name": "results_authorised_by",
+          "type": "string",
+          "description": "Extension: Person who authorized the results."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/specimenTestedBy').value.ofType(string)",
+          "name": "specimen_tested_by",
+          "type": "string",
+          "description": "Extension: Person who tested the specimen."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/targetTimeDays').value.ofType(integer)",
+          "name": "target_time_days",
+          "type": "integer",
+          "description": "Extension: Target turnaround time in days."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/targetTimeMins').value.ofType(integer)",
+          "name": "target_time_mins",
+          "type": "integer",
+          "description": "Extension: Target turnaround time in minutes."
+        }
+      ]
+    }
+  ]
+}

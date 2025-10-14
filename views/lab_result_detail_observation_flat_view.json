@@ -1,0 +1,207 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_result_detail_observation_flat",
+  "title": "Flat view definition for Observation (Lab Result Detail) resource",
+  "status": "active",
+  "description": "A flattened view of Observation resources representing individual lab test result details (child observations), extracting result values, interpretations, ranges, and result-specific extensions.",
+  "resource": "Observation",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the Observation resource."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:obx-set-id').value.first()",
+          "name": "obx_set_id",
+          "type": "string",
+          "description": "The OBX set identifier value."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:obx-sub-id').value.first()",
+          "name": "obx_sub_id",
+          "type": "string",
+          "description": "The OBX sub identifier value."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:result:obr-set-id').value.first()",
+          "name": "obr_set_id",
+          "type": "string",
+          "description": "The OBR set identifier linking to parent test request."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').code.first()",
+          "name": "category_code",
+          "type": "string",
+          "description": "The category code (e.g., lab-result)."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/observation-category').display.first()",
+          "name": "category_display",
+          "type": "string",
+          "description": "The display text for the observation category."
+        },
+        {
+          "path": "basedOn.first().reference",
+          "name": "based_on_service_request",
+          "type": "string",
+          "description": "Reference to the ServiceRequest this observation is based on."
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string",
+          "description": "The status of the observation (e.g., final, preliminary)."
+        },
+        {
+          "path": "effective.ofType(dateTime)",
+          "name": "effective_datetime",
+          "type": "dateTime",
+          "description": "The date and time of the result value."
+        },
+        {
+          "path": "issued",
+          "name": "issued_datetime",
+          "type": "dateTime",
+          "description": "The date and time the result was released."
+        },
+        {
+          "path": "performer.where(resolve().resourceType = 'Practitioner').getReferenceKey(Practitioner)",
+          "name": "performer_practitioner_id",
+          "type": "string",
+          "description": "The ID of the Practitioner performer."
+        },
+        {
+          "path": "performer.where(resolve().resourceType = 'Organization').getReferenceKey(Organization)",
+          "name": "performer_organization_id",
+          "type": "string",
+          "description": "The ID of the Organization performer."
+        },
+        {
+          "path": "value.ofType(CodeableConcept).text",
+          "name": "result_text",
+          "type": "string",
+          "description": "The text representation of the result value."
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/codedValue').code.first()",
+          "name": "coded_value_code",
+          "type": "string",
+          "description": "The coded result value code."
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/codedValue').display.first()",
+          "name": "coded_value_display",
+          "type": "string",
+          "description": "The coded result value display text."
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/observation').code.first()",
+          "name": "observation_code",
+          "type": "string",
+          "description": "The observation code."
+        },
+        {
+          "path": "value.ofType(CodeableConcept).coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/observation').display.first()",
+          "name": "observation_type",
+          "type": "string",
+          "description": "The observation type/display text."
+        },
+        {
+          "path": "derivedFrom.first().getReferenceKey(Observation)",
+          "name": "parent_observation_id",
+          "type": "string",
+          "description": "The ID of the parent Observation this result is derived from."
+        },
+        {
+          "path": "interpretation.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/abnormalFlagCode').code.first()",
+          "name": "abnormal_flag_code",
+          "type": "string",
+          "description": "The abnormal flag code indicating result interpretation."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/parameter').value.ofType(string)",
+          "name": "parameter",
+          "type": "string",
+          "description": "Extension: The test parameter name."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/result-status/code').value.ofType(string)",
+          "name": "result_status_code",
+          "type": "string",
+          "description": "Extension: Result status code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/result-status/codeType').value.ofType(string)",
+          "name": "result_status_code_type",
+          "type": "string",
+          "description": "Extension: Result status code type."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/resultSemiquantitive').value.ofType(string)",
+          "name": "result_semiquantitative",
+          "type": "string",
+          "description": "Extension: Semi-quantitative result value."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/note').value.ofType(boolean)",
+          "name": "note",
+          "type": "boolean",
+          "description": "Extension: Note flag indicator."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/workUnitsInMinutes').value.ofType(decimal)",
+          "name": "work_units_in_minutes",
+          "type": "decimal",
+          "description": "Extension: Work units in minutes for the test."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/costUnits').value.ofType(decimal)",
+          "name": "cost_units",
+          "type": "decimal",
+          "description": "Extension: Cost units for the test."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/valueType').value.ofType(string)",
+          "name": "value_type",
+          "type": "string",
+          "description": "Extension: The type of value (e.g., numeric, text)."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/standardCode').value.ofType(boolean)",
+          "name": "standard_code",
+          "type": "boolean",
+          "description": "Extension: Whether this uses a standard code."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/unit').value.ofType(string)",
+          "name": "unit",
+          "type": "string",
+          "description": "Extension: Unit of measurement for the result."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/lowRange').value.ofType(decimal)",
+          "name": "low_range",
+          "type": "decimal",
+          "description": "Extension: Low reference range value."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/highRange').value.ofType(decimal)",
+          "name": "high_range",
+          "type": "decimal",
+          "description": "Extension: High reference range value."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/result/remarks').value.ofType(string)",
+          "name": "remarks",
+          "type": "string",
+          "description": "Extension: Additional remarks about the result."
+        }
+      ]
+    }
+  ]
+}

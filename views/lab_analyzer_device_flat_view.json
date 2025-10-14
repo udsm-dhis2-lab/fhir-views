@@ -1,0 +1,51 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_analyzer_device_flat",
+  "title": "Flat view definition for Device (Lab Analyzer) resource",
+  "status": "active",
+  "description": "A flattened view of Device resources representing laboratory analyzers, extracting analyzer identification and type information.",
+  "resource": "Device",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the Device resource."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:analyzer-code').value.first()",
+          "name": "analyzer_code",
+          "type": "string",
+          "description": "The analyzer code identifier value."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/lab-test-result/analyzer-code/codeType').value.ofType(string)",
+          "name": "analyzer_code_type",
+          "type": "string",
+          "description": "Extension: The analyzer code type/classification."
+        },
+        {
+          "path": "type.coding.where(system = 'http://terminology.hl7.org/CodeSystem/device-type').code.first()",
+          "name": "device_type_code",
+          "type": "string",
+          "description": "The device type code (e.g., laboratory)."
+        },
+        {
+          "path": "type.coding.where(system = 'http://terminology.hl7.org/CodeSystem/device-type').display.first()",
+          "name": "device_type_display",
+          "type": "string",
+          "description": "The display text for the device type."
+        },
+        {
+          "path": "type.text",
+          "name": "device_type_text",
+          "type": "string",
+          "description": "The plain text description of the device type."
+        }
+      ]
+    }
+  ]
+}

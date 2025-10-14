@@ -1,0 +1,79 @@
+{
+  "resourceType": "http://41.59.228.177/datapipes/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_diagnostic_report_flat",
+  "status": "active",
+  "resource": "DiagnosticReport",
+  "text": "Flat view definition for DiagnosticReport resource.",
+  "fhirVersion": ["4.0"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:obr-set-id').value.first()",
+          "name": "obr_set_id",
+          "type": "string"
+        },
+        {
+          "path": "basedOn[0].reference",
+          "name": "service_request_ref",
+          "type": "string"
+        },
+        {
+          "path": "category.coding[0].system",
+          "name": "category_system",
+          "type": "string"
+        },
+        {
+          "path": "category.coding[0].code",
+          "name": "category_code",
+          "type": "string"
+        },
+        {
+          "path": "category.coding[0].display",
+          "name": "category_display",
+          "type": "string"
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "path": "conclusionCode[0].coding[0].system",
+          "name": "conclusion_system",
+          "type": "string"
+        },
+        {
+          "path": "conclusionCode[0].coding[0].code",
+          "name": "confirmed_diagnosis_code",
+          "type": "string"
+        },
+        {
+          "path": "conclusionCode[0].coding[0].display",
+          "name": "confirmed_diagnosis_type",
+          "type": "string"
+        },
+        {
+          "path": "performer[0].getReferenceKey(Organization)",
+          "name": "performing_facility_id",
+          "type": "string"
+        },
+        {
+          "path": "resultsInterpreter[0].getReferenceKey(Practitioner)",
+          "name": "practitioner_id",
+          "type": "string"
+        },
+        {
+          "path": "specimen[0].getReferenceKey(Specimen)",
+          "name": "specimen_id",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "resourceType": "http://hl7.org/fhir/uv/sql-on-fhir/StructureDefinition/ViewDefinition",
+  "name": "lab_test_service_request_flat",
+  "title": "Flat view definition for ServiceRequest (Lab Test) resource",
+  "status": "active",
+  "description": "A flattened view of ServiceRequest resources representing lab test requests, extracting test details, requester/performer information, and custom extensions.",
+  "resource": "ServiceRequest",
+  "fhirVersion": ["4.0.1"],
+  "select": [
+    {
+      "column": [
+        {
+          "path": "getResourceKey()",
+          "name": "id",
+          "type": "string",
+          "description": "The logical ID of the ServiceRequest resource."
+        },
+        {
+          "path": "identifier.where(system = 'urn:sys:obr-set-id').value.first()",
+          "name": "obr_set_id",
+          "type": "string",
+          "description": "The OBR set identifier value."
+        },
+        {
+          "path": "status",
+          "name": "status",
+          "type": "string",
+          "description": "The status of the service request (e.g., completed, active)."
+        },
+        {
+          "path": "intent",
+          "name": "intent",
+          "type": "string",
+          "description": "The intent of the service request (e.g., order, plan)."
+        },
+        {
+          "path": "priority",
+          "name": "priority",
+          "type": "string",
+          "description": "The priority of the service request (e.g., routine, urgent, stat)."
+        },
+        {
+          "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/requested-lab-test/type-of-test/codeType').code.first()",
+          "name": "test_type_code",
+          "type": "string",
+          "description": "The code for the type of lab test requested."
+        },
+        {
+          "path": "code.coding.where(system = 'http://fhir.moh.go.tz/fhir/lab-request/requested-lab-test/type-of-test/codeType').display.first()",
+          "name": "test_type_display",
+          "type": "string",
+          "description": "The display text for the type of lab test requested."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/service-request-category').code.first()",
+          "name": "category_code",
+          "type": "string",
+          "description": "The category code for the service request (e.g., lab-request-test)."
+        },
+        {
+          "path": "category.coding.where(system = 'http://fhir.moh.go.tz/fhir/ValueSet/service-request-category').display.first()",
+          "name": "category_display",
+          "type": "string",
+          "description": "The display text for the service request category."
+        },
+        {
+          "path": "requester.getReferenceKey(Organization)",
+          "name": "requester_organization_id",
+          "type": "string",
+          "description": "The ID of the Organization that requested the service."
+        },
+        {
+          "path": "performer.first().getReferenceKey(Organization)",
+          "name": "performer_organization_id",
+          "type": "string",
+          "description": "The ID of the Organization performing the service."
+        },
+        {
+          "path": "recorder.getReferenceKey(Practitioner)",
+          "name": "recorder_practitioner_id",
+          "type": "string",
+          "description": "The ID of the Practitioner who recorded the request."
+        },
+        {
+          "path": "specimen.first().getReferenceKey(Specimen)",
+          "name": "specimen_id",
+          "type": "string",
+          "description": "The ID of the associated Specimen resource."
+        },
+        {
+          "path": "extension.where(url = 'http://fhir.moh.go.tz/fhir/lab-request/requested-lab-test/repeated').value.ofType(integer)",
+          "name": "repeated_count",
+          "type": "integer",
+          "description": "Extension: Number of times the test has been repeated."
+        }
+      ]
+    }
+  ]
+}
