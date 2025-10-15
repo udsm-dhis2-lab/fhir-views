@@ -19,7 +19,7 @@
           "type": "string"
         },
         {
-          "path": "basedOn[0].reference",
+          "path": "basedOn.getReferenceKey(ServiceRequest)",
           "name": "service_request_ref",
           "type": "string"
         },

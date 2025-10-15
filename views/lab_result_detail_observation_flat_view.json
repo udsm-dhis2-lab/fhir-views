@@ -46,7 +46,7 @@
           "description": "The display text for the observation category."
         },
         {
-          "path": "basedOn.first().reference",
+          "path": "basedOn.getReferenceKey(ServiceRequest)",
           "name": "based_on_service_request",
           "type": "string",
           "description": "Reference to the ServiceRequest this observation is based on."
@@ -70,13 +70,13 @@
           "description": "The date and time the result was released."
         },
         {
-          "path": "performer.where(resolve().resourceType = 'Practitioner').getReferenceKey(Practitioner)",
+          "path": "performer.where(reference.startsWith('Practitioner/')).first().getReferenceKey(Practitioner)",
           "name": "performer_practitioner_id",
           "type": "string",
           "description": "The ID of the Practitioner performer."
         },
         {
-          "path": "performer.where(resolve().resourceType = 'Organization').getReferenceKey(Organization)",
+          "path": "performer.where(reference.startsWith('Organization/')).first().getReferenceKey(Organization)",
           "name": "performer_organization_id",
           "type": "string",
           "description": "The ID of the Organization performer."
