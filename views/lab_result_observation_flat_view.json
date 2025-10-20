@@ -76,19 +76,6 @@
           "description": "The ID of the associated Specimen resource."
         },
         {
-          "path": "fhir_id",
-          "sql": "SELECT SPLIT_PART(fhir_id, '-', 3) as specimen_id_unique FROM hfj_resource WHERE res_type = 'Observation' AND res_id = id",
-          "name": "specimen_id_unique",
-          "type": "string",
-          "description": "The specimen identifier value."
-        },
-        {
-          "path": "specimen.getReferenceKey(Specimen).split('-')[-1]",
-          "name": "specimen_id_unique",
-          "type": "string",
-          "description": "The ID of the associated Specimen resource (trimmed)."
-        },
-        {
           "path": "performer.where(reference.startsWith('Practitioner/')).first().getReferenceKey(Practitioner)",
           "name": "performer_practitioner_id",
           "type": "string",
