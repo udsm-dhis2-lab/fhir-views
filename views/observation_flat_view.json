@@ -46,16 +46,6 @@
           "type": "string"
         },
         {
-          "path": "value.ofType(CodeableConcept).coding.code",
-          "name": "val_concept_code",
-          "type": "string"
-        },
-        {
-          "path": "value.ofType(CodeableConcept).coding.system",
-          "name": "val_concept_system",
-          "type": "string"
-        },
-        {
           "path": "value.ofType(string)",
           "name": "value_string",
           "type": "string"
