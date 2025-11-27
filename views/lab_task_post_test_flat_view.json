@@ -54,12 +54,12 @@
           "type": "string"
         },
         {
-          "path": "output.where(type.coding.code = 'resultsReceivedAtFacility').valueDateTime",
+          "path": "output.where(type.coding.exists(code = 'resultsReceivedAtFacility')).value.ofType(dateTime)",
           "name": "results_received_at_facility",
           "type": "dateTime"
         },
         {
-          "path": "output.where(type.coding.code = 'dateTimeResultsprovidedToClient').valueDateTime",
+          "path": "output.where(type.coding.exists(code = 'dateTimeResultsprovidedToClient')).value.ofType(dateTime)",
           "name": "results_provided_to_client",
           "type": "dateTime"
         },
